@@ -1,0 +1,549 @@
+/* ============================================================
+   productDetails.css
+   Matches the screenshot design:
+   - Left col: light-blue bg, "Shop Now" hero text, image card
+   - Right col: white, name+price, stars, size pills, qty, tabs, buttons
+   ============================================================ */
+
+/* ── Google Font (if not loaded globally) ── */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+/* ── Service bar ── */
+.pd-service-wrap {
+  padding: 10px 40px;
+  background: #f8f8f8;
+  border-bottom: 1px solid #ebebeb;
+}
+.pd-service-mobile {
+  border-top: 1px solid #ebebeb;
+  border-bottom: none;
+  margin-top: 24px;
+}
+
+/* ══════════════════════════════════════════
+   OUTER: two-column flex row
+   ══════════════════════════════════════════ */
+.pd-outer {
+  display: flex;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  min-height: 540px;
+}
+
+/* ──────────────────────────────────────────
+   LEFT COLUMN  –  light-blue background
+   ──────────────────────────────────────────*/
+.pd-left-col {
+  flex: 0 0 44%;
+  max-width: 80%;
+  background: inherit; /* light-blue from screenshot */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px 20px;
+  overflow: visible; /* let Shop Now text overhang */
+}
+
+/* Large "Shop Now" at the top of the left col, bleeding right */
+.pd-shop-now {
+  position: absolute;
+  top: 14px;
+  right: -10px; /* hangs slightly into right col */
+  font-size: 72px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -2px;
+  z-index: 3;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Rounded image card */
+.pd-img-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  margin-top: 64px; /* push below Shop Now text */
+  z-index: 2;
+}
+
+/* Heart */
+.pd-heart {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
+  width: 28px;
+}
+.pd-sk-heart {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+/* Static image (shortView) */
+.pd-static-img img,
+.pd-static-img span {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Slider container */
+.pd-slider-wrap {
+  width: 100%;
+}
+
+/* Override productSlider fixed widths */
+.pd-slider-wrap .respBig,
+.pd-slider-wrap .myImgWidth,
+.pd-slider-wrap .product-images-slider {
+  width: 100% !important;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
+/* Center thumbs */
+.pd-slider-wrap .product-images-slider-thumbs {
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 6px auto 4px !important;
+}
+
+.pd-slider-wrap .product-images-slider-thumbs .swiper-slide {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.pd-slider-wrap .product-images-slider-thumbs .swiper-slide-thumb-active {
+  border-color: #f5a623;
+}
+
+/* ──────────────────────────────────────────
+   RIGHT COLUMN  –  white background
+   ──────────────────────────────────────────*/
+.pd-right-col {
+  flex: 1;
+  background: #ffffff;
+  padding: 28px 32px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Name + Price ── */
+.pd-name-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 80px; /* push below where Shop Now overlaps */
+}
+
+.pd-name-block {
+  flex: 1;
+}
+
+.pd-product-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.pd-badge {
+  display: inline-block;
+  background: #f5a623;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.pd-price-block {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.pd-price-main {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.1;
+}
+
+.pd-price-strike {
+  font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.pd-price-label {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+/* Skeleton helpers */
+.pd-sk-title {
+  height: 26px;
+  width: 180px;
+  border-radius: 6px;
+}
+.pd-sk-price {
+  height: 30px;
+  width: 70px;
+  border-radius: 6px;
+}
+.pd-sk-stars {
+  height: 20px;
+  width: 140px;
+  border-radius: 6px;
+}
+.pd-sk-qty {
+  height: 36px;
+  width: 110px;
+  border-radius: 24px;
+}
+
+/* ── Star rating ── */
+.pd-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pd-rating-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1;
+}
+
+.pd-rating-sub {
+  font-size: 12px;
+  color: #555;
+}
+
+/* ── Size pills ── */
+.pd-variant-block {
+  margin-top: 2px;
+}
+
+.pd-size-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pd-pill {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd-pill:hover {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+.pd-pill-active {
+  background: #f5a623 !important;
+  border-color: #f5a623 !important;
+  color: #fff !important;
+}
+
+/* ── Quantity ── */
+.pd-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pd-qty-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.pd-circle-qty {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.pd-circle-qty button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.pd-circle-qty button:hover {
+  border-color: #f5a623;
+  background: #fff8ef;
+  color: #f5a623;
+}
+
+.pd-circle-qty span {
+  min-width: 32px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ── Tab list (vertical) ── */
+.pd-tab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 2px;
+}
+
+.pd-tab-item {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 1px solid #f5f5f5;
+  transition: color 0.15s;
+  font-family: "Poppins", sans-serif;
+}
+
+.pd-tab-item:hover {
+  color: #333;
+}
+
+.pd-tab-active {
+  color: #f5a623 !important;
+  font-weight: 600;
+}
+
+/* ── Action buttons ── */
+.pd-action-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.pd-btn-buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 32px;
+  background: #111;
+  color: #fff !important;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.2s;
+  white-space: nowrap;
+  font-family: "Poppins", sans-serif;
+}
+.pd-btn-buy:hover {
+  background: #333;
+}
+
+.pd-btn-cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 32px;
+  background: var(--primary-theme-color, #1aabe3);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  font-family: "Poppins", sans-serif;
+}
+.pd-btn-cart:hover {
+  opacity: 0.88;
+}
+.pd-btn-cart:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── WhatsApp ── */
+.pd-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #fff !important;
+  text-decoration: none !important;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+  transition: opacity 0.2s;
+}
+.pd-whatsapp img {
+  width: 20px;
+  height: 20px;
+}
+.pd-whatsapp:hover {
+  opacity: 0.88;
+}
+
+/* ── Share row ── */
+.pd-share-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* ── Grouped products ── */
+.pd-grouped-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.pd-grouped-name {
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+}
+.pd-grouped-name:hover {
+  color: #f5a623;
+}
+
+/* ══════════════════════════════════════════
+   BELOW SECTION  –  full-width tabs, related
+   ══════════════════════════════════════════ */
+.pd-below {
+  max-width: 1100px;
+  margin: 24px auto 60px;
+  padding: 0 24px;
+  font-family: "Poppins", sans-serif;
+}
+
+.pd-desc-section {
+  margin-bottom: 24px;
+}
+
+.pd-category-line {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.pd-desc-text {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+}
+
+.pd-details-tabs {
+  margin-top: 24px;
+}
+
+.pd-related {
+  margin-top: 32px;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pd-outer {
+    flex-direction: column;
+  }
+
+  .pd-left-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 60px 20px 20px;
+  }
+
+  .pd-shop-now {
+    font-size: 42px;
+    right: 10px;
+    top: 10px;
+  }
+
+  .pd-img-card {
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .pd-right-col {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+
+  .pd-name-price {
+    margin-top: 0;
+  }
+
+  .pd-btn-buy,
+  .pd-btn-cart {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .pd-below {
+    padding: 0 16px;
+  }
+  
+}
+
+
+

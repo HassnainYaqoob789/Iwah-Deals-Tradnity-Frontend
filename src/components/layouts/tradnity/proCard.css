@@ -1,0 +1,354 @@
+/* ================================================
+   pic2-card  –  Collection 2 Product Card Design
+   ================================================ */
+
+.pic2-card {
+  background: transparent;
+  border-radius: 16px;
+  border: 1px solid var(--card-border-color, #e8e8e8);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+
+.pic2-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Image area ── */
+.pic2-image-wrap {
+  position: relative;
+  padding: 12px;
+  background: inherit;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pic2-image {
+  width: 100% !important;
+  height: 320px !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.35s ease;
+}
+
+.pic2-card:hover .pic2-image {
+  transform: scale(1.04);
+}
+
+.pic2-images {
+  width: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.35s ease;
+}
+
+.pic2-card:hover .pic2-images {
+  transform: scale(1.04);
+}
+
+/* ── Wishlist heart – top left ── */
+.pic2-heart {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: 32px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* ── In-stock badge – top right ── */
+.pic2-stock-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.pic2-in-stock {
+  background: #22c55e;
+  color: #fff;
+}
+
+.pic2-out-stock {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* ── Discount label – bottom-left of image ── */
+.pic2-discount-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  background: var(--primary-theme-color);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* ── Card body ── */
+.pic2-body {
+  padding: 12px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ── Rating row ── */
+.pic2-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pic2-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.pic2-reviews {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ── Product name ── */
+.pic2-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none !important;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pic2-name:hover {
+  color: var(--primary-theme-color);
+}
+
+/* ── Category ── */
+.pic2-category {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ── Price row ── */
+.pic2-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.pic2-original-price {
+  font-size: 13px;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.pic2-sale-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ── Add to cart button ── */
+.pic2-cart-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 9px 0;
+  border: 2px solid var(--primary-theme-color);
+  background: transparent;
+  color: var(--primary-theme-color);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pic2-cart-btn:hover {
+  background: var(--primary-theme-color);
+  color: #fff;
+}
+
+
+/* ── Equal-height slider cards ── */
+.product-4 .slick-track {
+  display: flex !important;
+}
+
+.product-4 .slick-slide {
+  height: inherit !important;
+}
+
+.product-4 .slick-slide > div {
+  height: 100%;
+}
+
+/* Card stretches full height */
+.pic2-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Body fills remaining space */
+.pic2-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Clamp product name to exactly 2 lines so all cards align */
+.pic2-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em; /* reserves space even for 1-line titles */
+  line-height: 1.4em;
+}
+
+/* Push price + button to the bottom */
+.pic2-price-row {
+  margin-top: auto;
+}
+
+.pic2-cart-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+
+
+.categories-grid {
+  width: 95%;
+  max-width: 95%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns on desktop */
+  gap: 1.5rem;
+  padding-bottom: 12px;
+  padding-top: 4px;
+  margin: 0 auto;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.category-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 95%;
+  margin-top: 40px;
+}
+
+.category-img-wrapper img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 130%;
+  object-fit: contain;
+  object-position: bottom;
+  display: block;
+  z-index: 1;
+}
+
+.category-label h3 {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #8b0000;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+}
+
+
+/* Fix slick arrow clipping */
+.slick-slider {
+  overflow: visible !important;
+}
+
+.slick-prev {
+  left: -30px !important;
+  z-index: 10;
+}
+
+.slick-next {
+  right: -30px !important;
+  z-index: 10;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+/* Small Tablet */
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .category-img-wrapper {
+    margin-top: 25px;
+  }
+
+  .category-label h3 {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .category-label h3 {
+    font-size: 0.65rem;
+  }
+}

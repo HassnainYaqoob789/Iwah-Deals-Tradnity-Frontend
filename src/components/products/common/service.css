@@ -1,0 +1,104 @@
+/* ================================================
+   Service Section
+   ================================================ */
+
+.svc-section {
+  padding: 48px 20px;
+  background: #fff;
+}
+
+/* ── Grid: equal columns, centered ── */
+.svc-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Individual service item ── */
+.svc-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 260px;
+}
+
+/* ── Circular icon wrapper ── */
+.svc-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #1aabe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.svc-icon-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* makes icon white */
+}
+
+/* ── Title ── */
+.svc-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+/* ── Description ── */
+.svc-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Skeleton loaders ── */
+.svc-icon-skeleton {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  animation: svc-pulse 1.4s ease-in-out infinite;
+  margin-bottom: 18px;
+}
+
+.svc-sk-title {
+  height: 14px;
+  width: 120px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.svc-sk-desc {
+  height: 10px;
+  width: 180px;
+  border-radius: 6px;
+}
+
+@keyframes svc-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .svc-grid {
+    gap: 28px;
+  }
+  .svc-item {
+    min-width: 150px;
+  }
+}

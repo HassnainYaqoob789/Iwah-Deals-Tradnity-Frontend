@@ -1,0 +1,156 @@
+/* ================================================
+   Collection Section  –  "Best Selling Products"
+   ================================================ */
+
+/* ── Outer wrapper: rounded card with light border ── */
+.col-section-wrapper {
+  --card-border-color: rgba(240, 192, 64, 0.45);
+  width: 80%;
+  margin: 24px auto;
+  padding: 22px 20px 28px;
+  background: #fdf8f0;
+  border: 1.5px solid #f0c040;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* ── Header row ── */
+.col-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.col-see-all-btn-header {
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.col-section-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.col-section-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.col-section-subtitle {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── "See All Products" pill button ── */
+.col-see-all-btn {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1.5px solid var(--primary-theme-color);
+  color: var(--primary-theme-color);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.col-see-all-btn:hover {
+  background: var(--primary-theme-color);
+  color: #fff;
+}
+
+/* ── Slider wrapper ── */
+.col-slider-wrap {
+  position: relative;
+}
+
+/* Slide item: needed so pic2-card margin doesn't cause layout issues */
+.col-slide-item {
+  padding: 0 6px;
+}
+
+/* ── Custom prev/next arrows ── */
+.col-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  transition: background 0.2s, color 0.2s;
+}
+
+.col-arrow:hover {
+  background: var(--primary-theme-color);
+  color: #fff;
+  border-color: var(--primary-theme-color);
+}
+
+.col-arrow-prev {
+  left: -18px;
+}
+
+.col-arrow-next {
+  right: -18px;
+}
+
+/* ── "Best Seller" badge on cards in this section (inherited from pic2-stock-badge) ── */
+.col-section-wrapper .pic2-stock-badge {
+  background: var(--primary-theme-color);
+  color: #fff;
+}
+
+/* ── Loader state ── */
+.col-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .col-section-wrapper {
+    margin: 14px 10px;
+    padding: 16px 12px 20px;
+  }
+
+  .col-section-title {
+    font-size: 16px;
+  }
+
+  .col-arrow-prev {
+    left: -10px;
+  }
+
+  .col-arrow-next {
+    right: -10px;
+  }
+}

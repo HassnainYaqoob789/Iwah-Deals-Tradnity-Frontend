@@ -1,0 +1,77 @@
+:root {
+	 --input-color: #99a3ba;
+	 --input-border: #cdd9ed;
+	 --input-background: #fff;
+	 --input-placeholder: #cbd1dc;
+	 --input-border-focus: #ff7885;
+	 --group-color: var(--input-color);
+	 --group-border: var(--input-border);
+	 --group-background: #eef4ff;
+	 --group-color-focus: #fff;
+	 --group-border-focus: var(--input-border-focus);
+	 --group-background-focus: #678efe;
+}
+ .form-fields {
+	 display: block;
+	 width: 100%;
+	 padding: 11px 16px;
+	 line-height: 25px;
+	 font-size: 14px;
+	 font-weight: 500;
+	 font-family: inherit;
+	 border-radius: 6px;
+	 -webkit-appearance: none;
+	 color: rgba(0, 0, 0, 0.7);
+	 border: 1px solid var(--input-border);
+	 background: var(--input-background);
+	 transition: border 0.3s ease;
+}
+ .form-fields::placeholder {
+	 color: var(--input-placeholder);
+}
+ .form-fields:focus {
+	 outline: none;
+	 border-color: var(--input-border-focus);
+}
+ .form-groups {
+	 position: relative;
+	 display: flex;
+	 width: 100%;
+}
+.form-groups .form-fields {
+	 white-space: nowrap;
+	 display: block;
+}
+ .form-groups .form-fields {
+	 position: relative;
+	 z-index: 1;
+	 flex: 1 1 auto;
+	 width: 1%;
+	 margin-top: 0;
+	 margin-bottom: 0;
+}
+ .form-groups {
+	 text-align: center;
+	 padding: 11px 12px;
+	 font-size: 14px;
+	 line-height: 25px;
+	 color: var(--group-color);
+	 background: var(--group-background);
+	 border: 1px solid var(--group-border);
+	 transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+ .form-groups:focus-within {
+	 color: var(--group-color-focus);
+	 background: var(--group-background-focus);
+	 border-color: var(--group-border-focus);
+}
+ label{
+    font-weight: 500;
+ }
+
+ .disabledT{
+	
+    background-color: rgba(0,0,0,0.08);
+    color: rgba(0,0,0,0.5);
+
+ }

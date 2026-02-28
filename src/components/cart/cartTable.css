@@ -1,0 +1,372 @@
+/* ============================================================
+   cartTable.css  –  matches the Shopping Cart screenshot
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ── Empty state ── */
+.ct-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-empty h3  { font-size: 20px; font-weight: 700; margin: 16px 0 4px; color: #222; }
+.ct-empty p   { font-size: 14px; color: #777; margin-bottom: 20px; }
+.ct-btn-continue {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #111;
+  color: #fff !important;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ── Page wrapper ── */
+.ct-page {
+  padding: 20px 0 60px;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+}
+
+.ct-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ── Two-column layout ── */
+.ct-layout {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+/* ══════════════════════════════════════
+   LEFT: cart table
+   ══════════════════════════════════════ */
+.ct-left { flex: 1; min-width: 0; }
+
+.ct-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ct-table thead tr {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ct-table thead th {
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  text-align: left;
+  text-transform: capitalize;
+  background: transparent;
+}
+
+.ct-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.15s;
+}
+.ct-table tbody tr:hover { background: #fafafa; }
+
+.ct-table td {
+  padding: 16px 12px;
+  vertical-align: middle;
+}
+
+/* Item cell */
+.ct-item-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 220px;
+}
+
+.ct-item-img-link { flex-shrink: 0; }
+
+.ct-item-img {
+  width: 72px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  border: 1px solid #eee;
+}
+
+.ct-item-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+  line-height: 1.5;
+}
+.ct-item-name:hover { color: #f5a623; }
+
+/* Price / subtotal */
+.ct-price, .ct-subtotal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  white-space: nowrap;
+}
+
+/* Qty control */
+.ct-qty-cell { white-space: nowrap; }
+
+.ct-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ct-qty-btn {
+  width: 32px;
+  height: 32px;
+  background: #f5f5f5;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #444;
+  transition: background 0.15s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-qty-btn:hover    { background: #eaeaea; }
+.ct-qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.ct-qty-input {
+  width: 36px;
+  height: 32px;
+  border: none;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Remove button */
+.ct-remove-cell { text-align: center; }
+
+.ct-remove-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #888;
+  transition: border-color 0.15s, color 0.15s;
+  padding: 0;
+}
+.ct-remove-btn:hover { border-color: #e53935; color: #e53935; }
+
+/* ── Action buttons row ── */
+.ct-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ct-actions-left { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.ct-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333 !important;
+  text-decoration: none !important;
+  background: #fff;
+  transition: border-color 0.15s;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-btn-outline:hover { border-color: #888; }
+
+.ct-btn-teal {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff !important;
+  text-decoration: none !important;
+  background: var(--primary-theme-color, #1aabe3);
+  transition: opacity 0.15s;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-btn-teal:hover { opacity: 0.88; }
+
+.ct-btn-update {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 24px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #333;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-btn-update:hover { background: #555; }
+
+/* ══════════════════════════════════════
+   RIGHT: Summary panel
+   ══════════════════════════════════════ */
+.ct-summary {
+  width: 300px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1.5px solid #f0c040;
+  border-radius: 10px;
+  padding: 20px 20px 24px;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  position: sticky;
+  top: 80px;
+}
+
+.ct-summary-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 16px;
+}
+
+.ct-summary-section { margin-bottom: 14px; }
+
+.ct-summary-toggle {
+  cursor: pointer;
+  font-weight: 600;
+  color: #222;
+  font-size: 13px;
+}
+
+.ct-summary-hint {
+  font-size: 11px;
+  color: #999;
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.ct-summary-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 12px 0;
+}
+
+.ct-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Totals */
+.ct-totals { display: flex; flex-direction: column; gap: 8px; }
+
+.ct-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #444;
+}
+.ct-total-small { font-size: 11px; color: #999; }
+
+/* Order total */
+.ct-order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 16px;
+}
+.ct-order-total span:first-child { font-size: 14px; font-weight: 600; color: #222; }
+.ct-grand-total { font-size: 20px; font-weight: 800; color: #111; }
+
+/* Proceed button */
+.ct-btn-checkout {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  background: #111;
+  color: #fff !important;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none !important;
+  margin-bottom: 10px;
+  transition: background 0.15s;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-btn-checkout:hover { background: #333; }
+
+/* PayPal button */
+.ct-btn-paypal {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #f5c842;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: opacity 0.15s;
+  font-family: 'Poppins', sans-serif;
+}
+.ct-btn-paypal:hover { opacity: 0.9; }
+.ct-paypal-logo { font-style: italic; font-weight: 900; font-size: 15px; }
+
+/* Zip row */
+.ct-zip-row {
+  font-size: 11px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.ct-zip-link { color: var(--primary-theme-color, #1aabe3); text-decoration: none; font-size: 11px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ct-layout { flex-direction: column; }
+  .ct-summary { width: 100%; position: static; }
+  .ct-item-cell { flex-direction: column; align-items: flex-start; }
+  .ct-table thead { display: none; }
+  .ct-table td { display: flex; padding: 6px 10px; }
+  .ct-table tr { display: block; border-bottom: 1px solid #eee; padding: 10px 0; }
+  .ct-actions { flex-direction: column; align-items: stretch; }
+  .ct-actions-left { flex-direction: column; }
+}

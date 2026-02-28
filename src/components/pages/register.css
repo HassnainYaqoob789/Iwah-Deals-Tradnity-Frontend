@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --secondary-color: #0a1b1b;
+  --background-color: #fbfef9;
+  --gray-color: #8d8e8e;
+  --light-gray-color: #a5b2b9;
+  --passive-color: #f2f4f3;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+
+.merger{
+  width: 60vw;
+}
+
+
+.myButtons{
+	/* position: absolute;     */
+    color: #000;    
+    font-size: 14px;
+    /* top: 50%;
+    left: 50%; */
+    margin-top:20px;
+    border: none;
+background-color: #fff;
+    transform: translate(0%, 0%);
+    width: 200px;
+    height: 50px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 2px;
+}
+
+.myButtons::before, 
+.myButtons::after, 
+.spansa::before, 
+.spansa::after{
+	content: '';
+    position: absolute;    
+    width: 10px;
+    height: 10px;
+    transition: 1s;
+}
+
+
+
+.myButtons:hover::before,
+.myButtons:hover::after,
+.myButtons:hover .spansa::before,
+.myButtons:hover .spansa::after{
+    width: calc( 190px / 2 );
+    height: calc( 40px / 2 );
+}
+
+.modifierI {
+  background-color: var(--passive-color);
+  padding: 1rem;
+  border: 1px solid var(--passive-color);
+  border-radius: 6px;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.stylesa{
+  border-radius: 0px 6px 6px 0px;
+  background: var(--passive-color);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+
+}
+
+.marginia{
+    min-width: 50vw;
+    max-width: 1000px;
+    margin: 6rem 4rem 4rem 4rem;
+    padding: 5rem 5em;
+    box-shadow: 2px 3px 50px rgba(0,0,0,0.08);
+    border-radius: 6px;
+}
+.margini{
+  margin: 6rem 0rem 0rem 0rem;
+  padding: 2rem 2em;
+  box-shadow: 0px 3px 50px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+}
+
+
+
+.form-container {
+  
+  height: 100%;
+
+  text-align:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.form {
+  width: 90%;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.form {
+  padding-top: 1rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.name-input {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn-input {
+  width: 100%;
+  gap: 1rem;
+}
+
+.name-input .modifierI {
+  width: 100%;
+}
+
+
+
+.secondary-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  width: 50%;
+  padding: 1rem;
+  border: none;
+  border-radius: 54px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  transition: all 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background-color: #202020;
+}
+
+.secondary-btn:active {
+  background-color: var(--passive-color);
+  color: black;
+}
+
+.primary-heading {
+  font-weight: 600;
+  font-size: 45px !important;
+}
+
+.secondary-heading {
+  color: var(--light-gray-color);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height:23px;
+}
+
+.secondary-text {
+  color: var(--gray-color);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.circle {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 22%,
+    rgb(199 142 31) 63%
+  );
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 980px) {
+  .wave {
+    display: none;
+  }
+  .side-panel {
+    display: none;
+  }
+  .form-container {
+    width: 100%;
+
+  }
+
+  .marginia{
+    margin: 4rem 0rem 4rem 0rem;
+    padding: 5rem 0px;
+    width: 100%;
+  }
+  .form-container::after {
+    display: none;
+  }
+  .section-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-input {
+    width: 100%;
+  }
+ 
+  .nav-container {
+    width: 100%;
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .name-input {
+    flex-direction: column;
+  }
+  .primary-heading {
+    font-size: 35px !important;
+  }
+  .merger{
+    width: 100%;
+  }
+  .nav-container {
+    position: relative;
+  }
+  .nav-list {
+    gap: 2rem;
+  }
+}
+
+

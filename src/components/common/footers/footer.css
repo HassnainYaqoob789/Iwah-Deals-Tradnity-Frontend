@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* ========================================
+   FOOTER NEW DESIGN
+   ======================================== */
+
+.footer-new,
+.footer-new *,
+.footer-new *::before,
+.footer-new *::after {
+  box-sizing: border-box;
+}
+
+.footer-new {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--primary-theme-color);
+  color: #fff;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* KEY: prevent horizontal scroll */
+}
+
+/* ---------- Newsletter Bar ---------- */
+.footer-newsletter-bar {
+  background-color: var(--primary-theme-color);
+  padding: 38px 60px;
+  width: 100%;
+}
+
+.footer-newsletter-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer-newsletter-text h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.footer-newsletter-text p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-email-input {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  width: 320px;
+  max-width: 100%;
+  outline: none;
+  color: #333;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-email-input::placeholder {
+  color: #aaa;
+}
+
+.footer-subscribe-btn {
+  padding: 12px 32px;
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.25s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.footer-subscribe-btn:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-1px);
+}
+
+/* ---------- Main Body ---------- */
+.footer-main-body {
+  padding: 44px 60px 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer-columns {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.footer-col {
+  flex: 1 1 150px;
+  min-width: 0; /* prevent flex children from overflowing */
+}
+
+.footer-col-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+
+.footer-col-links {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+.footer-col-links li {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  float: none !important;
+}
+
+.footer-col-links li a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.footer-col-links li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------- Social Icons — CRITICAL FIX ---------- */
+/* Force horizontal row layout, override any global li/ul styles */
+.social-icons-list {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  align-items: center !important;
+}
+
+.social-icons-list > li {
+  display: inline-flex !important;
+  float: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.social-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+  color: #fff !important;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.social-link.facebook         { background: #1877F2; }
+.social-link.facebook:hover   { background: #0e5cd9; }
+.social-link.instagram        { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.social-link.tiktok           { background: #000; }
+.social-link.tiktok:hover     { background: #111; }
+.social-link.youtube          { background: #FF0000; }
+.social-link.youtube:hover    { background: #cc0000; }
+
+/* ---------- Address Block ---------- */
+.footer-address-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-address-line {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.6;
+  word-break: break-word; /* prevent long email from overflowing */
+}
+
+.footer-address-line a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+.footer-address-line a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.company-info strong {
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  display: block;
+}
+
+.cr-number {
+  font-weight: 800;
+  color: #F98814;
+  letter-spacing: 0.6px;
+  font-size: 14px;
+}
+
+/* ---------- Bottom Bar ---------- */
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 16px 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.footer-bottom-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background 0.2s ease;
+}
+
+.footer-social-icon-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.footer-bottom-copy {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: right;
+  word-break: break-word;
+}
+
+.footer-bottom-copy a {
+  color: #fff;
+}
+
+/* ==========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .footer-newsletter-bar { padding: 28px 32px; }
+  .footer-main-body      { padding: 36px 32px 24px; }
+  .footer-bottom-bar     { padding: 16px 32px; }
+}
+
+/* Mobile landscape */
+@media (max-width: 768px) {
+  .footer-newsletter-bar {
+    padding: 24px 20px;
+  }
+
+  .footer-newsletter-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-newsletter-text h2 { font-size: 20px; }
+
+  .footer-newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .footer-email-input {
+    width: 100%;
+  }
+
+  .footer-subscribe-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-main-body {
+    padding: 28px 20px 20px;
+  }
+
+  /* 2-column grid on mobile */
+  .footer-col {
+    flex: 0 0 calc(50% - 12px);
+    width: calc(50% - 12px);
+    max-width: calc(50% - 12px);
+  }
+
+  .footer-bottom-bar {
+    padding: 14px 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-bottom-copy   { text-align: center; }
+  .footer-bottom-social { justify-content: center; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .footer-newsletter-bar  { padding: 20px 16px; }
+  .footer-newsletter-text h2 { font-size: 18px; }
+  .footer-main-body       { padding: 24px 16px 16px; }
+
+  /* Single column on small phones */
+  .footer-col {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-bottom-bar      { padding: 12px 16px; }
+  .footer-bottom-copy     { font-size: 11px; }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .footer-newsletter-text h2 { font-size: 16px; }
+  .footer-col-title          { font-size: 12px; }
+  .footer-col-links li a     { font-size: 12px; }
+  .footer-address-line       { font-size: 12px; }
+}

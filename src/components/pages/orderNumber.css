@@ -1,0 +1,15 @@
+.icon {
+    margin:5px 0px;
+    width:64px;
+    height:64px;
+    border:2px solid #34f234;
+    text-align:center;
+    display:inline-block;
+    border-radius:50%;
+    line-height:60px;
+    box-shadow: 2px 5px 5px rgba(0,0,0,0.2);
+  }
+.icon i.fa {
+    font-size:30px;
+    color:#34f234;
+  } 
