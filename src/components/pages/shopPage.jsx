@@ -116,7 +116,11 @@ const ShopPage = (props) => {
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
-    document.querySelector("body").scrollTo(0, 0);
+    // document.querySelector("body").scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"           // ← yeh line add karo
+    });
   };
 
   function handleClick(e) {
@@ -421,9 +425,6 @@ const ShopPage = (props) => {
       }}>
         <div className="text-center">
           <Loader />
-          <p className="mt-3">
-            {LoadingSSS ? 'Category products loading...' : 'Products loading...'}
-          </p>
         </div>
       </div>
     );
@@ -739,7 +740,7 @@ const ShopPage = (props) => {
         </div>
       </div>
 
-      <div className="respM my-5">
+      <div className="respM">
 
         <div className="collection-collapse-block open">
           <div
@@ -1013,7 +1014,6 @@ const ShopPage = (props) => {
         overflowX: 'auto',
         display: 'flex',
         justifyContent: 'center',
-        padding: '0 10px'
       }}>
         <ReactPaginate
           breakLabel="..."

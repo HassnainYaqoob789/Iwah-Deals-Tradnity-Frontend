@@ -11,6 +11,8 @@ import ScrollToTop from "../pages/scroll_to_top";
 import Demoimg from "../../assets/images/placeholder.gif";
 import Collection3 from "../layouts/tradnity/collection3";
 import Heart from "react-heart";
+import Loader from "../../svg_code/loader";
+
 import React, { useEffect, useRef, useState } from "react";
 import Service from "./common/service";
 import store from "../../store";
@@ -41,6 +43,7 @@ const ProductDetailsMe = (props) => {
     currencies,
     appconfigs,
     CutLoading,
+    // LoadingSSS,
     contactDetails,
   } = props;
   const myurl = window.location.href;
@@ -548,9 +551,29 @@ const ProductDetailsMe = (props) => {
       parsedColorCodes && parsedColorCodes !== null
         ? parsedColorCodes
         : appconfigs;
-    let categoryId = locaaaa?.state?.category_ids
+    let categoryId = locaaaa?.state?.category_ids || ""
     store.dispatch(getAllProducts(categoryId, setLoadingSSSS));
   }, [contactDetails, colorCodes]);
+
+  document.querySelector(".loader-wrapper").style = "display: none";
+  // Check if loading
+  const isLoading = LoadingSSS
+
+  // Loading UI
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center", // horizontal center
+          alignItems: "center",     // vertical center
+          height: "100vh",          // viewport height
+        }}
+      >
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -577,8 +600,9 @@ const ProductDetailsMe = (props) => {
                     src={image && image[0]}
                     style={{
                       width: "100%",
-                      height: "100%",
+                      height: "auto",
                       border: "1px solid rgb(236 132 95 / 50%)",
+                      display: "block",
                     }}
                   />
                 ) : image &&
@@ -594,6 +618,8 @@ const ProductDetailsMe = (props) => {
                       width: "100%",
                       height: "100%",
                       border: "1px solid rgb(236 132 95 / 50%)",
+                      display: "block",
+
                     }}
                   />
                 ) : (
@@ -613,6 +639,8 @@ const ProductDetailsMe = (props) => {
                 images={image}
                 item={item}
                 imageLoad={() => imageLoaded()}
+                imageStyle={{ width: "100%", height: "auto", objectFit: "contain" }} // ✅ pass this
+
               />
             )}
 
@@ -1095,11 +1123,11 @@ const ProductDetailsMe = (props) => {
                           }}
                         >
                           <span className="spansa"></span> Add to Cart
-                          &nbsp;{" "}
-                          <FiShoppingCart
+                          &nbsp;
+                          {/* <FiShoppingCart
                             size={22}
                             className="fw-bold mx-2"
-                          />
+                          /> */}
                         </button>
                       </div>
 
@@ -1201,8 +1229,8 @@ const ProductDetailsMe = (props) => {
 
         {!shortView && (
           <div className="my-5">
-            <Collection3 pathName={pathName} />
-            <PeopleViewed pathName={pathName} />
+            <Collection3 pathName={pathName} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} />
+            <PeopleViewed pathName={pathName} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} />
           </div>
         )}
       </div>

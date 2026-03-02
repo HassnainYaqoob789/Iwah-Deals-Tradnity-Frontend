@@ -17,7 +17,7 @@ import EmptySearch from "../../../svg_code/emptySearch";
 import Loader from "../../../svg_code/loader";
 import history from "../../../history";
 
-const Collection3 = ({ item, items, symbol, subtitle, pathName }) => {
+const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,category_Id}) => {
   const [loading, setLoading] = useState(true);
   const [testArr, setTestArr] = useState([]);
   let arr = [];
@@ -113,7 +113,9 @@ const Collection3 = ({ item, items, symbol, subtitle, pathName }) => {
                     <div key={index}>
                       <ProductItem
                         product={product}
+                        category_ids={category_Id}
                         symbol={symbol}
+                        clickedReload={clickedReload}
                         onAddToWishlistClicked={() =>
                           localStorage.getItem("customerData")
                             ? handleClick(product.id)

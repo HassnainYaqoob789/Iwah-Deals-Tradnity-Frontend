@@ -18,12 +18,12 @@ import history from "../../../history";
 
 /* Custom prev / next arrows */
 const PrevArrow = ({ onClick }) => (
-  <button className="col-arrow col-arrow-prev" onClick={onClick}>
+  <button style={{ marginLeft: "18px" }} className="col-arrow col-arrow-prev" onClick={onClick}>
     &#8249;
   </button>
 );
 const NextArrow = ({ onClick }) => (
-  <button className="col-arrow col-arrow-next" onClick={onClick}>
+  <button style={{ marginRight: "18px" }} className="col-arrow col-arrow-next" onClick={onClick}>
     &#8250;
   </button>
 );
@@ -59,7 +59,7 @@ class Collection extends Component {
     return (
       <div
         className="col-section-wrapper mt-4 mb-4"
-       style={{ width: "100%", margin: "0" }}
+        style={{ width: "100%", margin: "0" }}
       >
         {/* ── Header row ── */}
         <div className="col-section-header">

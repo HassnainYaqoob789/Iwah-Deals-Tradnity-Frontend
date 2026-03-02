@@ -1568,8 +1568,8 @@ hr.style1 {
   background-color: var(--primary-theme-color);
   color: #ffffff;
 }
-
-/* @-webkit-keyframes svg-text-anim {
+/* 
+@-webkit-keyframes svg-text-anim {
   40% {
     stroke-dashoffset: 0;
     fill: transparent;
@@ -13361,3 +13361,4 @@ mark {
 .collection-heading span {
   font-weight: 400; /* normal */
 }
+

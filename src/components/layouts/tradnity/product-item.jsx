@@ -46,7 +46,7 @@ class ProductItem extends Component {
   }
 
   render() {
-    const { product, appconfigs, category_ids } = this.props;
+    const { product, appconfigs, category_ids, clickedReload } = this.props;
     const { wishList } = this.state;
 
     const colorCodes = localStorage.getItem("color_theme");
@@ -83,7 +83,13 @@ class ProductItem extends Component {
               to={{
                 pathname: productUrl,
                 state: { category_ids: category_ids }
-              }}>
+              }}
+              onClick={(e) => {
+                if (clickedReload === true) {
+                  window.location.href = productUrl;
+                }
+              }}
+            >
               {imageUrl
                 ? <LazyLoadImage
                   src={imageUrl}

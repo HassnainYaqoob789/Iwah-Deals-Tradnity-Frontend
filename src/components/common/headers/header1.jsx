@@ -964,11 +964,7 @@ const Header2 = ({
                         flex: 1,
                         color: "#333"
                       }}
-                      onClick={() => {
-                        if (!hasSubs) {
-                          setShow(false);
-                        }
-                      }}
+                      onClick={() => setShow(false)}
                     >
                       {m.name}
                     </Link>
@@ -1034,6 +1030,7 @@ const Header2 = ({
                           >
                             {sub.name}
                           </Link>
+                          
                         </li>
                       ))}
                     </ul>

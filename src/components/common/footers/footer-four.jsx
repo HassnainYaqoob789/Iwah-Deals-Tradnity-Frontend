@@ -5,7 +5,7 @@ import "./footer.css"
 import { Link } from 'react-router-dom';
 import ScrollToTop from '../../pages/scroll_to_top';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa';  // ← fa6 has modern X logo
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube, FaWhatsapp } from 'react-icons/fa';  // ← fa6 has modern X logo
 class FooterFour extends Component {
     constructor(props) {
         super(props);
@@ -132,7 +132,8 @@ class FooterFour extends Component {
 
                         {/* Column 4: Follow Us */}
                         {appconfig?.footer_follow_us === 1 && (
-                            <div className="footer-col">
+                            // <div className="footer-col">
+                            <div className="footer-col follow-us-col d-flex flex-column align-items-center">
                                 <h4 className="footer-col-title">FOLLOW US</h4>
                                 <ul className="footer-col-links social-icons-list">
                                     {sociallinks && sociallinks.data ? (
@@ -181,6 +182,23 @@ class FooterFour extends Component {
                                                     </a>
                                                 </li>
                                             )}
+                                            {sociallinks.data[3]?.is_active === 1 && (
+                                                <li>
+                                                    <a
+                                                        href={
+                                                            contactDetails?.data?.whatsapp_number
+                                                                ? `https://wa.me/${contactDetails.data.whatsapp_number}`
+                                                                : "/#"
+                                                        }
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                        aria-label="WhatsApp"
+                                                        className="social-link whatsapp"
+                                                    >
+                                                        <FaWhatsapp size={18} />
+                                                    </a>
+                                                </li>
+                                            )}
 
                                             {/* YouTube (uncomment if you want to add it later) */}
                                             {/* {sociallinks.data[3]?.is_active === 1 && (
@@ -213,8 +231,8 @@ class FooterFour extends Component {
                                     </p>
                                 )}
 
-                                <p className="footer-address-line company-info">
-                                    <strong>IWAHDEALS TRADING</strong><br />
+                                <p className="cr-no-heading footer-address-line company-info">
+                                    <strong>IWAHDEALS TRADING</strong>
                                     <span className="cr-number font-weight-bold fontsize-16">CR: 176652-3</span>
                                 </p>
                             </div>

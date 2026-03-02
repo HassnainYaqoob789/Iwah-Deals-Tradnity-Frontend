@@ -1,13 +1,13 @@
 //base URL
 
-// export const base_url = `${window.location.protocol}/Admin/public/`;
-// export const temp_url = `${window.location.protocol}/Admin/public/`;
+export const base_url = `${window.location.protocol}/Admin/public/`;
+export const temp_url = `${window.location.protocol}/Admin/public/`;
 
 // export const base_url = "https://dev.tradnity.com/Admin/public/"
 // export const temp_url = "https://dev.tradnity.com/Admin/public/"
 
-export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
-export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
+// export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
+// export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
 
 // export const base_url = "https://hscollection.com.pk/Admin/public/"
 // export const temp_url = "https://hscollection.com.pk/Admin/public/"
@@ -62,11 +62,7 @@ export const Reorder = `api/checkout/re-order/&currency=${
     ? localStorage.getItem("changeCurrencies")
     : localStorage.getItem("defaultDataaa")
 }`;
-export const orderCancel = `api/checkout/order-cancel/&currency=${
-  localStorage.getItem("changeCurrencies")
-    ? localStorage.getItem("changeCurrencies")
-    : localStorage.getItem("defaultDataaa")
-}`;
+export const orderCancel = `api/checkout/order-cancel/`;
 export const sendOtp = "api/customer/request_otp";
 export const verfiyotp = "api/customer/verify_otp";
 export const leapardTracking = "api/leopards/tracking";

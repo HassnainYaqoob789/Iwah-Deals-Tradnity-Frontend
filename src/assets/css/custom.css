@@ -984,3 +984,39 @@ body,
     }
   }
   
+
+
+  @media (max-width: 768px) {
+  .firstDiv {
+    height: auto !important;
+    max-height: none !important;
+  }
+}
+
+
+/* Add to your CSS file */
+@media (max-width: 768px) {
+  .firstDiv {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Target common slider libraries */
+  .firstDiv .slick-slide img,
+  .firstDiv .carousel img,
+  .firstDiv .swiper-slide img,
+  .firstDiv img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    max-height: 350px;
+  }
+
+  /* Remove any fixed height on slider wrapper */
+  .firstDiv .slick-list,
+  .firstDiv .slick-track,
+  .firstDiv .slick-slide,
+  .firstDiv .slick-slide > div {
+    height: auto !important;
+  }
+}

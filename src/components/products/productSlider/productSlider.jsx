@@ -2,13 +2,14 @@ import "./productSlider.scss";
 import PropTypes from "prop-types";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
 import { Navigation, Thumbs } from "swiper";
-import { useState } from "react";
 import "swiper/swiper.min.css";
 import "swiper/modules/pagination/pagination.min.css";
 import React from "react";
 import Placeholder from "../../../assets/images/placeholder.gif";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Magnifier from "react-magnifier";
+import { useEffect, useState } from "react";
+
 
 const ProductImagesSlider = (props) => {
   const [activeThumb, setActiveThumb] = useState(null);
@@ -16,6 +17,27 @@ const ProductImagesSlider = (props) => {
     return { video_url: v.url, type: "video" };
   });
   const [allUrl, setAllUrl] = useState([...videoUrl, ...props.images]);
+
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return false;
+    return window.matchMedia("(max-width: 767px)").matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mql.matches);
+
+    onChange();
+    if (mql.addEventListener) mql.addEventListener("change", onChange);
+    else mql.addListener(onChange);
+
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener("change", onChange);
+      else mql.removeListener(onChange);
+    };
+  }, []);
+
 
   return (
     <>
@@ -30,11 +52,17 @@ const ProductImagesSlider = (props) => {
             border: "1px solid rgb(236 132 95 / 50%)",
             borderRadius: "6px",
             width: "100%",
+            ...(isMobile ? { height: "clamp(420px, 75vh, 720px)" } : {}),
+
           }}
+          autoHeight={isMobile}
+
           modules={[Navigation, Thumbs]}
           grabCursor={true}
           thumbs={{ swiper: activeThumb }}
-          className="product-images-slider my-2 myImgWidth"
+          className={`product-images-slider myImgWidth ${isMobile ? "product-images-slider--mobile" : "my-2"
+            }`}
+
         >
           {props.images &&
             props.images.length !== 0 &&
@@ -56,13 +84,13 @@ const ProductImagesSlider = (props) => {
                   ) : (
                     <Magnifier
                       className="setHeight"
-                      height="25em"
+                      height="30em"
                       src={
                         item && typeof item == "string"
                           ? item
                           : item.original_image_url
-                          ? item.original_image_url
-                          : Placeholder
+                            ? item.original_image_url
+                            : Placeholder
                       }
                       width="100%"
                     />
@@ -110,8 +138,8 @@ const ProductImagesSlider = (props) => {
                         item && typeof item == "string"
                           ? item
                           : item.original_image_url
-                          ? item.original_image_url
-                          : Placeholder
+                            ? item.original_image_url
+                            : Placeholder
                       }
                       style={{ display: "block", width: "100%" }}
                       alt="product images"

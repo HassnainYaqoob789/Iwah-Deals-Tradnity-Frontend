@@ -302,7 +302,7 @@
 
 /* Fix slick arrow clipping */
 .slick-slider {
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
 .slick-prev {

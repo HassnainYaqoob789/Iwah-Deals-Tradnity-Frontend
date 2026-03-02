@@ -19,9 +19,9 @@ export default {
       apiUrl += `${categoryId}`;
     }
 
-     if (document.querySelector(".loader-wrapper")) {
-            document.querySelector(".loader-wrapper").style = "display: block";
-        }
+    if (document.querySelector(".loader-wrapper")) {
+      document.querySelector(".loader-wrapper").style = "display: block";
+    }
     getData(apiUrl)
       .then(async res => {
         let data = [];
@@ -51,20 +51,20 @@ export default {
           data.push(obj);
           return null
         });
-                    if (setLoading) setLoading(false);
+        if (setLoading) setLoading(false);
 
-          if (document.querySelector(".loader-wrapper")) {
-                    document.querySelector(".loader-wrapper").style = "display: none";
-                }
+        if (document.querySelector(".loader-wrapper")) {
+          document.querySelector(".loader-wrapper").style = "display: none";
+        }
         cb(data)
       })
       .catch(err => {
-                    if (setLoading) setLoading(false);
+        if (setLoading) setLoading(false);
 
         console.error(err)
-          if (document.querySelector(".loader-wrapper")) {
-                    document.querySelector(".loader-wrapper").style = "display: none";
-                }
+        if (document.querySelector(".loader-wrapper")) {
+          document.querySelector(".loader-wrapper").style = "display: none";
+        }
         // document.querySelector(".loader-wrapper").style = "display: none";
 
       })
@@ -1320,7 +1320,11 @@ export default {
       })
   },
   CancelOrder: (payload, cb, timeout) => {
-    postData(url.temp_url + url.orderCancel + payload + '?token=true')
+
+    postData(url.temp_url + url.orderCancel + payload + `?token=true&currency=${localStorage.getItem("changeCurrencies")
+        ? localStorage.getItem("changeCurrencies")
+        : localStorage.getItem("defaultDataaa")
+      }`)
       .then(async res => {
         cb(res.data);
       })
