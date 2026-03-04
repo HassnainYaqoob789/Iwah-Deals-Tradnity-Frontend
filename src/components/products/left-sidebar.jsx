@@ -242,10 +242,21 @@ class LeftSideBar extends Component {
       loading: true,
     });
 
-    const categoryId = this.props.location?.state?.category_ids || null;
-    const productId = this.props.location?.state?.product_id || null;
+    const getNumberFromQuery = (value) => {
+      if (!value) return null;
+      const num = Number(value);
+      return isNaN(num) ? null : num;
+    };
+
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const categoryPId = getNumberFromQuery(searchParams.get("category"));
+    const productPId = getNumberFromQuery(searchParams.get("product"));
+    const categoryId = this.props.location?.state?.category_ids || categoryPId || null;
+    const productId = this.props.location?.state?.product_id || productPId || null;
+    // console.log("checkasadsaddsrtyuipoiuytre", categoryPId, productPId, categoryId, productId)
+
     // const productId = false || null;
-    store.dispatch(getAllProducts(categoryId, productId,this.setLoading));
+    store.dispatch(getAllProducts(categoryId, productId, this.setLoading));
     store.dispatch(getProductCategory());
     store.dispatch(
       changeRouteName([{ routeName: this.props.pathName }])
@@ -317,7 +328,7 @@ class LeftSideBar extends Component {
 
     return (
       <div>
-        {/* Invisible top anchor point for smooth scrolling */}
+        {/* Invisible anchor for smooth scroll to top */}
         <div
           ref={this.topRef}
           style={{
@@ -326,11 +337,27 @@ class LeftSideBar extends Component {
             left: 0,
             height: "1px",
             width: "1px",
-            pointerEvents: "none", // click na ho ispe
+            pointerEvents: "none",
           }}
         />
 
-        {item ? (
+        {loading ? (
+          // ── Loading state ── highest priority
+          <div
+            className="text-center"
+            style={{
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ScrollToTop />
+            <LoaderSpinner />
+          </div>
+        ) : item ? (
+          // ── Product found ──
           <>
             <ScrollToTop />
             <ProductDetailsMe
@@ -340,30 +367,31 @@ class LeftSideBar extends Component {
               CutLoading={CutLoading}
             />
           </>
-        ) : loading && !shortView ? (
-          <div className="text-center" style={{ marginTop: "5vh" }}>
-            <ScrollToTop />
-            <br />
-            <br />
+        ) : (
+          // ── No product after loading finished ──
+          !shortView && (
             <div
+              className="text-center"
               style={{
+                minHeight: "70vh",
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "100vh",
+                padding: "2rem",
               }}
             >
-              <LoaderSpinner />
-            </div>
-          </div>
-        ) : (
-          !shortView && (
-            <div className="text-center" style={{ marginTop: "5vh" }}>
+              <ScrollToTop />
               <EmptySearch />
               <br />
-              <span className="fs-5 my-3">
-                Sorry No Products Found!
-              </span>
+              <br />
+              <h4 className="fw-bold mb-3">Sorry, No Products Found!</h4>
+              <p className="text-muted">
+                The product you're looking for might have been removed or is
+                temporarily unavailable.
+              </p>
+              {/* Optional: back button ya suggestion */}
+              {/* <button className="btn btn-primary mt-4">Go Back to Shop</button> */}
             </div>
           )
         )}

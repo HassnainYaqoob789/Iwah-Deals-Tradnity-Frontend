@@ -149,6 +149,7 @@ class Collection2 extends Component {
                       <ProductItem
                         product={product}
                         product_ids={product?.id || ""}
+                        category_ids={categoryID}
                         symbol={symbol}
                         onAddToCompareClicked={() => addToCompare(product)}
                         onAddToWishlistClicked={() =>

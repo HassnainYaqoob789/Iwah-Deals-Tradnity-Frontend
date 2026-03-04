@@ -976,7 +976,7 @@ const ShopPage = (props) => {
             })
             .slice(pagesVisited, pagesVisited + usersPerPage)
             .map((data, key) => {
-              console.log("ProductIddd",)
+              // console.log("ProductIddd",)
               return (
                 <div
                   className={

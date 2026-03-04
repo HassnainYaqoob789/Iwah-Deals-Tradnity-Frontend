@@ -10,7 +10,7 @@ import store from '../../../store';
 import { Modal } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import LeftSidebar from '../../products/left-sidebar';
+// import LeftSidebar from '../../products/left-sidebar';
 import history from '../../../history';
 import Placeholder from '../../../svg_code/placeholder';
 import '../../../assets/css/custom.css'
@@ -82,11 +82,13 @@ class ProductItem extends Component {
             <Link
               to={{
                 pathname: productUrl,
-                state: { category_ids: category_ids, product_id: product_ids }
+                search: `?category=${category_ids}&product=${product_ids}`, // Add search params
+                state: { category_ids: category_ids, product_id: product_ids } // Keep state
               }}
               onClick={(e) => {
                 if (clickedReload === true) {
-                  window.location.href = productUrl;
+                  // Full reload ke saath bhi search params bhejo
+                  window.location.href = `${productUrl}?category=${category_ids}&product=${product_ids}`;
                 }
               }}
             >

@@ -172,7 +172,7 @@ body {
   margin-top: 45px;
 }
 .carouselImg {
-  border-radius: 2rem;
+  border-radius: 15px;
   margin: 0 auto;
   width: 90vw;
   height: 20vw;

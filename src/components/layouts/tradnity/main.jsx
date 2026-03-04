@@ -41,6 +41,7 @@ import CategoriesImage from "./categoriesImage";
 import { Product433 } from "../../../services/script";
 import CustomChatbot from "../../chatbot/CustomChatbot";
 import Loader from "../../../svg_code/loader";
+import LoaderSpinner from "../../../components/loadingspin"
 import SliderLoader from "../../../svg_code/sliderLoader";
 import HeadSEO from "./headSEO";
 import { Link } from "react-router-dom";
@@ -97,7 +98,17 @@ class TradnityMain extends Component {
       check_notificaton: Cookies.get("Notification_token"),
       loading: true,
       carousel: "",
+      productsLoading: true, // new state for products loading
     };
+  }
+
+  // API controlled loading
+  setLoading = (value) => {
+    this.setState({ productsLoading: value });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log("Products loading state changed:", this.state.productsLoading);
   }
 
   componentDidMount() {
@@ -107,12 +118,12 @@ class TradnityMain extends Component {
       order: "asc",
       // category_id: 6,
     };
-    store.dispatch(FetchCategByProducts({ params: paramsObj }));
+    // store.dispatch(FetchCategByProducts({ params: paramsObj }));
     store.dispatch(fetchImages());
     // setTimeout(() => {
     // this.setState({ apicondtionn: true })
     // localStorage.setItem("apiupdate", this.state.apicondtionn)
-    store.dispatch(getAllProducts());
+    store.dispatch(getAllProducts(null, null, this.setLoading));
     // store.dispatch(fetchBestSeller());
 
     // }, 120000);
@@ -154,6 +165,17 @@ class TradnityMain extends Component {
       loadingBottom,
     } = this.state;
 
+
+    const { productsLoading } = this.state;
+
+    // Agar products loading ho rahe hain → loader show karo
+    if (productsLoading) {
+      return (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "70vh" }}>
+          <SliderLoader />
+        </div>
+      );
+    }
     // const category6Products = getcatebyproducts?.filter((product) =>
     //   product.category?.some((cat) => cat.category_id === 6),
     // );

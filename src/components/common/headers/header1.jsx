@@ -1039,7 +1039,7 @@ const Header2 = ({
               );
             })}
 
-            {appconfig && appconfig?.nav_about && appconfig.nav_about === 1 ? (
+            {/* {appconfig && appconfig?.nav_about && appconfig.nav_about === 1 ? (
               <li className="menu_item_header1">
                 <Link
                   to={`${process.env.PUBLIC_URL}/about-us`}
@@ -1057,7 +1057,7 @@ const Header2 = ({
                   about
                 </Link>
               </li>
-            ) : null}
+            ) : null} */}
 
             {/* <li className="menu_item_header1">
               <Link

@@ -10,7 +10,6 @@ import {
   viewOrderDetail,
   getDeals,
   getNewDeals,
-  getAllProducts,
   getOrders,
 } from "../../../actions";
 import { fetchBestSeller } from "../../../actions/index";

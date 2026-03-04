@@ -51,6 +51,7 @@ const ProductDetailsMe = (props) => {
   const modalRef = useRef();
   const initialState = [];
   const locaaaa = useLocation();
+  const queryParams = new URLSearchParams(locaaaa.search);
   const [LoadingSSS, setLoadingSSSS] = useState(true);
   const [gData, setGData] = useState(initialState);
   // console.log("dataaaaaaaa", item);
@@ -538,6 +539,12 @@ const ProductDetailsMe = (props) => {
     return [];
   };
 
+  const getNumberFromQuery = (value) => {
+    if (!value) return null;
+    const num = Number(value);
+    return isNaN(num) ? null : num;
+  };
+
   useEffect(() => {
     if (
       /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -552,8 +559,14 @@ const ProductDetailsMe = (props) => {
       parsedColorCodes && parsedColorCodes !== null
         ? parsedColorCodes
         : appconfigs;
-    let categoryId = locaaaa?.state?.category_ids || null;
-    let productId = locaaaa?.state?.product_id || null;
+
+
+    const categoryPId = getNumberFromQuery(queryParams.get("category"));
+    const productPId = getNumberFromQuery(queryParams.get("product"));
+
+
+    let categoryId = locaaaa?.state?.category_ids || categoryPId || null;
+    let productId = locaaaa?.state?.product_id || productPId || null;
     // let productId = false || null;
     store.dispatch(getAllProducts(categoryId, productId, setLoadingSSSS));
   }, [contactDetails, colorCodes]);

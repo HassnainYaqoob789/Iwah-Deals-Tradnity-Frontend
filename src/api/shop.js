@@ -13,7 +13,6 @@ const TIMEOUT = 100
 export default {
   getProducts: (cb, categoryId = null, productId = null, setLoading, timeout) => {
     let apiUrl = url.temp_url + url.getnewProducts;
-    console.log("producidjee", categoryId, productId)
     // Agar category ID hai to URL mein add karein
     if (categoryId) {
       apiUrl += `&category_id=${categoryId}`;
