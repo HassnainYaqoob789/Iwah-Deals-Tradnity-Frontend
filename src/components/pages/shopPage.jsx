@@ -35,7 +35,9 @@ import Placeholder from "../../svg_code/placeholder";
 import ScrollToTop from "./scroll_to_top";
 import ShopDrawer from "../layouts/tradnity/drawer";
 import EmptySearch from "../../svg_code/emptySearch";
-import Loader from "../../svg_code/loader";
+// import Loader from "../../svg_code/loader";
+import LoaderSpinner from "../../components/loadingspin"
+
 import history from "../../history";
 import HeadSEO from "../layouts/tradnity/headSEO";
 import { FaRegStar, FaStar } from "react-icons/fa";
@@ -102,11 +104,10 @@ const ShopPage = (props) => {
 
   useEffect(() => {
     // Category ID lein
-    const categoryId = locationGetData?.state?.categories?.id;
-    console.log("checkIDsss", locationGetData?.state)
+    const categoryId = locationGetData?.state?.categories?.id || null;
     setLoadingSSSS(true)
     // Category ID ke saath products fetch karein
-    store.dispatch(getAllProducts(categoryId, setLoadingSSSS));
+    store.dispatch(getAllProducts(categoryId, null,setLoadingSSSS));
 
   }, [locationGetData?.state?.categories])
 
@@ -424,7 +425,8 @@ const ShopPage = (props) => {
         height: '100vh'
       }}>
         <div className="text-center">
-          <Loader />
+          {/* <Loader /> */}
+          <LoaderSpinner />
         </div>
       </div>
     );
@@ -973,36 +975,41 @@ const ShopPage = (props) => {
               }
             })
             .slice(pagesVisited, pagesVisited + usersPerPage)
-            .map((data, key) => (
-              <div
-                className={
-                  pageSize >= 1870
-                    ? "col-md-2 my-2"
-                    : pageSize <= 1869 && pageSize >= 1250
-                      ? "col-md-3 my-2"
-                      : pageSize <= 1249 && pageSize >= 975
-                        ? "col-md-4 my-2"
-                        : "col-sm-6 col-xs-6 my-2"
-                }
-                key={key}
-              >
-                <ProductItem
-                  product={data}
-                  category_ids={locationGetData?.state?.categories?.id || ""}
-                  onAddToWishlistClicked={() =>
-                    localStorage.getItem("customerData")
-                      ? handleClick(data.api.id)
-                      : history.push(`${process.env.PUBLIC_URL}/login`)
+            .map((data, key) => {
+              console.log("ProductIddd",)
+              return (
+                <div
+                  className={
+                    pageSize >= 1870
+                      ? "col-md-2 my-2"
+                      : pageSize <= 1869 && pageSize >= 1250
+                        ? "col-md-3 my-2"
+                        : pageSize <= 1249 && pageSize >= 975
+                          ? "col-md-4 my-2"
+                          : "col-sm-6 col-xs-6 my-2"
                   }
-                  onAddToCartClicked={() => addItemTOCart(data.api.id)}
                   key={key}
-                />
-              </div>
-            ))}
+                >
+                  <ProductItem
+                    product={data}
+                    product_ids={data?.id || ""}
+                    category_ids={locationGetData?.state?.categories?.id || ""}
+                    onAddToWishlistClicked={() =>
+                      localStorage.getItem("customerData")
+                        ? handleClick(data.api.id)
+                        : history.push(`${process.env.PUBLIC_URL}/login`)
+                    }
+                    onAddToCartClicked={() => addItemTOCart(data.api.id)}
+                    key={key}
+                  />
+                </div>
+              )
+            })}
         </div>
       ) : (
         <div className="text-center my-5">
-          <Loader />
+          {/* <Loader /> */}
+          <LoaderSpinner />
         </div>
       )}
 

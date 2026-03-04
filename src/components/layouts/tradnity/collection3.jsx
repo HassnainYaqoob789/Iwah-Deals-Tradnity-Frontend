@@ -2,23 +2,26 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { connect } from "react-redux";
 import store from "../../../store";
-import { Product2a } from "../../../services/script";
+import { Product4 } from "../../../services/script";
 import {
   addToCart,
   addToWishlist,
   addToCartUnsafe,
   removeWishlist,
   addItemToCart,
+  FetchproductByCollection3,
 } from "../../../actions";
 import ProductItem from "./product-item";
 import "./proCard.css";
-import { getTrendingCollection } from "../../../services";
 import EmptySearch from "../../../svg_code/emptySearch";
-import Loader from "../../../svg_code/loader";
+// import Loader from "../../../svg_code/loader";
+import LoaderSpinner from "../../../components/loadingspin"
+
 import history from "../../../history";
 
-const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,category_Id}) => {
+const Collection3 = ({ item, symbol, subtitle, pathName, clickedReload, category_Id, maincompLoading, ProductCategories, getproductCollectionThree }) => {
   const [loading, setLoading] = useState(true);
+  const [productCate, setProductCate] = useState();
   const [testArr, setTestArr] = useState([]);
   let arr = [];
   function handleClick(e) {
@@ -31,55 +34,80 @@ const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,c
   }
 
   useEffect(() => {
-    arr.length = 0;
+    if (ProductCategories && ProductCategories.length !== 0) {
+      setProductCate(ProductCategories[0]?.category_id)
+    }
+  }, [ProductCategories])
 
-    let productF = item.find((el) => el.api.url_key === pathName);
-    if (
-      productF &&
-      productF.api &&
-      productF.api.related_product &&
-      productF.api.related_product.length !== 0
-    ) {
-      productF.api.related_product.map((e, i) => {
-        let openingA = item.find((el) => el.api.id === e);
-        arr.push(...arr, openingA);
-      });
-    } else {
-      arr.push(items.length !== 0 ? items : []);
-    }
-    if (arr.length !== 0) {
-      arr = arr.filter(
-        (value, index, self) =>
-          index ===
-          self.findIndex((t) =>
-            t && t.api
-              ? t.api.id === value.api.id && t.api.name === value.api.name
-              : null,
-          ),
-      );
-    }
 
-    if (arr.length <= 5) {
-      arr = arr.concat(items);
-    }
-
-    let dataN = arr.indexOf(productF);
-    if (dataN !== -1) {
-      arr.splice(dataN, 1);
-    }
-    const ids = arr.map((o) => o.id);
-    const filtered = arr.filter(
-      ({ id }, index) => !ids.includes(id, index + 1),
+  useEffect(() => {
+    // if (productCate) {
+    let porductCateIdss = productCate || ""
+    const paramsObj = {
+      token: "true",
+      currency: localStorage.getItem("changeCurrencies"),
+      order: "asc",
+      category_id: porductCateIdss,
+      limit: 10
+    };
+    store.dispatch(
+      FetchproductByCollection3({
+        paramsObj: paramsObj,
+        setLoading: setLoading   // ← function pass ho raha hai (important!)
+      })
     );
+    // }
 
-    setTestArr(filtered);
-  }, [window.location.pathname]);
+  }, [productCate])
 
-  if (items && items.length === 0) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-  }
+  useEffect(() => {
+    if (!maincompLoading && !loading) {
+
+      arr.length = 0;
+
+      let productF = item.find((el) => el.api.url_key === pathName);
+      if (
+        productF &&
+        productF.api &&
+        productF.api.related_product &&
+        productF.api.related_product.length !== 0
+      ) {
+        productF.api.related_product.map((e, i) => {
+          let openingA = item.find((el) => el.api.id === e);
+          arr.push(...arr, openingA);
+        });
+      } else {
+        arr.push(getproductCollectionThree?.length !== 0 ? getproductCollectionThree : []);
+      }
+      if (arr.length !== 0) {
+        arr = arr.filter(
+          (value, index, self) =>
+            index ===
+            self.findIndex((t) =>
+              t && t.api
+                ? t.api.id === value.api.id && t.api.name === value.api.name
+                : null,
+            ),
+        );
+      }
+
+      if (arr.length <= 5) {
+        arr = arr.concat(getproductCollectionThree);
+      }
+
+      let dataN = arr.indexOf(productF);
+      if (dataN !== -1) {
+        arr.splice(dataN, 1);
+      }
+      const ids = arr.map((o) => o.id);
+      const filtered = arr.filter(
+        ({ id }, index) => !ids.includes(id, index + 1),
+      );
+
+      setTestArr(filtered);
+    }
+
+  }, [window.location.pathname, maincompLoading, loading, getproductCollectionThree]);
 
   return (
     <div>
@@ -106,13 +134,14 @@ const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,c
               )}
             </div>
 
-            {testArr && testArr.length !== 0 ? (
-              <Slider {...Product2a} className="product-4 product-m mx-4 px-4">
+            {testArr && testArr?.length !== 0 ? (
+              <Slider {...Product4} className="product-4 product-m mx-4 px-4">
                 {testArr &&
                   testArr.map((product, index) => (
                     <div key={index}>
                       <ProductItem
                         product={product}
+                        product_ids={product?.id || ""}
                         category_ids={category_Id}
                         symbol={symbol}
                         clickedReload={clickedReload}
@@ -129,7 +158,7 @@ const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,c
               </Slider>
             ) : loading ? (
               <div style={{ textAlign: "center", margin: "auto" }}>
-                <Loader />
+                <LoaderSpinner />
               </div>
             ) : (
               <div className="text-center my-5">
@@ -147,22 +176,10 @@ const Collection3 = ({ item, items, symbol, subtitle, pathName, clickedReload ,c
 };
 
 const mapStateToProps = (state) => {
-  let actualPath =
-    state?.images?.pRoute.length !== 0 && state?.images?.pRoute[0]?.routeName;
-
   return {
     item: state?.data?.products,
-    items: getTrendingCollection(
-      state?.data?.products,
-      state?.data?.products.find((el) => el.api.url_key === actualPath)
-        .length !== 0 &&
-        state?.data?.products.find((el) => el.api.url_key === actualPath).api
-          .Category.length !== 0
-        ? state?.data?.products.find((el) => el.api.url_key === actualPath).api
-          .Category[0].name
-        : null,
-    ),
     symbol: state?.data?.symbol,
+    getproductCollectionThree: state.getproductCollectionThreeReducer.getproductCollectionThree,
   };
 };
 export default connect(mapStateToProps, {

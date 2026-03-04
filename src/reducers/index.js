@@ -14,6 +14,8 @@ import orderReducer from './order';
 import PagesReducer from './Pages';
 import categoryByProducts from './categorybyproduct'
 import areasReducer from "./areas"
+import getproductCollectionThreeReducer from './productCollectionThree'
+import getpeopleViewProductReducer from './peopleViewProduct'
 
 
 const rootReducer = combineReducers({
@@ -29,8 +31,13 @@ const rootReducer = combineReducers({
     orders: orderReducer,
     pages:PagesReducer,
     categoryByProducts,
+    areasReducer,
+    getpeopleViewProductReducer,
+    getproductCollectionThreeReducer,
     Intl,
-    areasReducer
 });
 
 export default rootReducer;
+
+
+

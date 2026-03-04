@@ -37,6 +37,15 @@
         margin-left: auto;
         margin-right: auto;
     }
+    /* container around magnifier area to show pointer cursor */
+    .mobile-magnifier-container {
+        cursor: zoom-in;
+        /* full size so any tap inside slide triggers event */
+        display: block;
+        width: 100%;
+        height: 100%;
+        pointer-events: auto;
+    }
 
     .secondResp {
         // width:"100%";
@@ -71,75 +80,18 @@
 }
 
 .setHeight {
-    height: 38em !important;
+    /* default desktop height to keep magnifier working */
+    height: 30em !important;
 }
 
-@media only screen and (min-width: 501px) and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
+    /* mobile: fill parent completely */
     .setHeight {
-        height: 26em !important;
-        margin-bottom: -156px !important;
-
+        height: 100% !important;
     }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 900px) {
-    .setHeight {
-        height: 21em !important;
-
-    }
-
-    .respBig {
-        width: 215px !important;
-    }
-}
-
-@media only screen and (min-width: 901px) and (max-width: 1030px) {
-    .setHeight {
-        height: 25em !important;
-
-    }
-
-    .respBig {
-        width: 260px !important;
-    }
-}
-
-@media only screen and (min-width: 1031px) and (max-width: 1160px) {
-    .setHeight {
-        height: 29em !important;
-
-    }
-
-    .respBig {
-        width: 330px !important;
-    }
-}
-
-@media only screen and (min-width: 1061px) and (max-width: 1280px) {
-    .setHeight {
-        height: 33em !important;
-
-    }
-
-    .respBig {
-        width: 366px !important;
-    }
-}
-
-@media only screen and (min-width: 1281px) and (max-width: 1335px) {
-    .setHeight {
-        height: 34em !important;
-
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .setHeight {
-        height: 26em !important;
-        margin-bottom: -156px !important;
-    }
-
-}
+/* legacy responsive size rules removed; use parent container scaling instead */
 
 
 
@@ -156,13 +108,41 @@
 }
 
 @media only screen and (max-width: 767px) {
+    /* let the slider shrink to its content and remove any clamp-generated blank space */
     .product-images-slider--mobile {
-        height: clamp(420px, 75vh, 720px) !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
+    /* modal overlay for clicked image */
+    .image-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 1rem; /* give some breathing room on small screens */
+    }
+
+    .image-modal img {
+        /* let the image size itself while respecting viewport */
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    /* ensure wrapper and slides adapt to content height */
     .product-images-slider--mobile .swiper-wrapper,
     .product-images-slider--mobile .swiper-slide {
-        height: 100%;
+        height: auto !important;
     }
 
     .product-images-slider--mobile .swiper-slide {
@@ -182,11 +162,10 @@
     /* IMPORTANT: override your old absolute img rules on mobile */
     .product-images-slider--mobile .swiper-slide img,
     .product-images-slider--mobile .product-images-slider-mobile {
-
         position: static !important;
         width: 100%;
         height: 100%;
-        object-fit: cover !important;
-
+        /* use contain to avoid cropping and show full image in magnifier */
+        object-fit: contain !important;
     }
 }

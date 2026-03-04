@@ -67,7 +67,7 @@ class Collection extends Component {
             <span
               className="title-inner1 mob-heading"
               style={{
-                fontSize: "22px",
+                fontSize: "1.375rem", /* 22px */
                 fontFamily: "Poppins",
                 fontWeight: "600",
               }}
@@ -92,6 +92,7 @@ class Collection extends Component {
                 <div key={index} className="col-slide-item">
                   <ProductItem
                     product={product}
+                    product_ids={product?.id || ""}
                     symbol={symbol}
                     onAddToWishlistClicked={() =>
                       localStorage.getItem("customerData")

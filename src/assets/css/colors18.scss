@@ -6,6 +6,13 @@
   $pgb: #fc9a199e;
   $pgt: #fc9b1cb8;
 
+/* prevent mobile browsers from automatically enlarging text */
+html, body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 
   $dot: #349a98;
   $bgb: #ff4164;
@@ -49,7 +56,14 @@
     margin-top:12%;
   }
   .mob-heading{
-    font-size:25px;
+    /* use relative units so headings scale with root font-size and are easier to override */
+    font-size: 1.5625rem; /* 25px */
+    /* if needed later, mobile-specific adjustments can go in media queries */
+  }
+  @media (max-width: 768px) {
+    .mob-heading {
+      font-size: 1.25rem; /* shrink on phones */
+    }
   }
   .social-media{
     max-width: 50%;
@@ -7137,7 +7151,7 @@
     font-size: 10px;
   }
   .mob-heading{
-    font-size:15px;
+    font-size: 0.9375rem; /* 15px */
   }
   .download-apps{
     width:45% !important;

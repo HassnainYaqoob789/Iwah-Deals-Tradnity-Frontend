@@ -85,15 +85,17 @@ export const changeRouteName = routes => ({
 //     dispatch(receiveProducts(filteredProducts));
 // }
 
-export const getAllProducts = (categoryId = null, setLoading) => dispatch => {
+export const getAllProducts = (categoryId = null, productId = null, setLoading) => dispatch => {
     dispatch(fetchProductsBegin());
+
     shop.getProducts(products => {
         dispatch(receiveProducts(products));
-        // Loading false when products received
+
         if (setLoading) setLoading(false);
         return products;
-    }, categoryId, setLoading) // setLoading bhi pass karo
-}
+
+    }, categoryId, productId, setLoading);
+};
 
 
 // Update getAllProducts
@@ -1333,6 +1335,33 @@ export const getAllAreas = (data) => ({
     type: types.GET_ALL_AREAS,
     data,
 });
+
+
+export const getAllproductByCollection3 = (data) => ({
+    type: types.PRODUCT_BY_COLLECTION_THREE,
+    data,
+});
+
+
+export const getAllpeopleViewProduct = (data) => ({
+    type: types.PEOPLE_VIEW_PROCUCT,
+    data,
+});
+
+
+export const FetchpeopleViewedProduct = (data) => (dispatch) => {
+    shop.CallEngine_peopleViewedProduct(data, (e) => {
+        dispatch(getAllpeopleViewProduct(e, data));
+    });
+};
+
+
+export const FetchproductByCollection3 = (data) => (dispatch) => {
+    shop.CallEngine_productByCollection3(data, (e) => {
+        dispatch(getAllproductByCollection3(e, data));
+    });
+};
+
 
 export const FetchCategAreas = (data) => (dispatch) => {
     shop.CallEnginegetAreas(data, (e) => {

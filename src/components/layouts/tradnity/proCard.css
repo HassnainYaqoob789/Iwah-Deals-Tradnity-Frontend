@@ -114,7 +114,11 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  /* grow to fill card so price row can be pushed to the bottom */
+  flex: 1;
 }
+
 
 /* ── Rating row ── */
 .pic2-rating-row {
@@ -145,6 +149,9 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  /* reserve vertical space for two lines even if only one line of text */
+  min-height: calc(1.4em * 2);
 }
 
 .pic2-name:hover {
@@ -162,7 +169,8 @@
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-top: 2px;
+  /* push to bottom of body container */
+  margin-top: auto;
 }
 
 .pic2-original-price {

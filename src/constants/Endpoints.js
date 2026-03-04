@@ -1,13 +1,13 @@
 //base URL
 
-export const base_url = `${window.location.protocol}/Admin/public/`;
-export const temp_url = `${window.location.protocol}/Admin/public/`;
+// export const base_url = `${window.location.protocol}/Admin/public/`;
+// export const temp_url = `${window.location.protocol}/Admin/public/`;
 
 // export const base_url = "https://dev.tradnity.com/Admin/public/"
 // export const temp_url = "https://dev.tradnity.com/Admin/public/"
 
-// export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
-// export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
+export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
+export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
 
 // export const base_url = "https://hscollection.com.pk/Admin/public/"
 // export const temp_url = "https://hscollection.com.pk/Admin/public/"
@@ -127,11 +127,15 @@ export const getnewestProducts = `api/products?new=1&token=true&order=asc&curren
 
 export const getnewProducts = `api/new/allproducts?token=true&order=asc&currency=${localStorage.getItem(
   "changeCurrencies"
-)}&category_id=`;
+)}`;
 
 
 export const catebyproductsroute = "api/new/allproducts";
 export const areas = "api/areas"
+
+export const productByCollection3_api = "api/new/allproducts"
+export const peopleViewProduct_api = "api/new/allproducts"
+
 
 export const returnorder = "api/refund-request";
 export const SubcriberEmail = "api/subscriber-email";

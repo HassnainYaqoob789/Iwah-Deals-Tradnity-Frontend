@@ -396,7 +396,7 @@ class TradnityMain extends Component {
                           title="Eastern Collection"
                           subtitle="Womens Wear"
                           categoryID="10"
-                          SeeAllProductsBtnCdn={false}
+                          SeeAllProductsBtnCdn={true}
 
                         />
                       </div>
@@ -446,7 +446,7 @@ class TradnityMain extends Component {
                           title="Eastern Collections"
                           subtitle="Men's Wear"
                           categoryID="15"
-                          SeeAllProductsBtnCdn={false}
+                          SeeAllProductsBtnCdn={true}
 
                         />
                       </div>
@@ -489,7 +489,7 @@ class TradnityMain extends Component {
                   title="Accessories"
                   subtitle="Men's Wear"
                   categoryID="20"
-                  SeeAllProductsBtnCdn={false}
+                  SeeAllProductsBtnCdn={true}
 
                 />
               </div>

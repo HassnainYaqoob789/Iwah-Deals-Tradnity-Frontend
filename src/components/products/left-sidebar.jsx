@@ -212,6 +212,7 @@ import ScrollToTop from "../pages/scroll_to_top";
 import ProductDetailsMe from "./productDetailsI";
 import EmptySearch from "../../svg_code/emptySearch";
 import Loader from "../../svg_code/loader";
+import LoaderSpinner from "../../components/loadingspin"
 
 class LeftSideBar extends Component {
   constructor(props) {
@@ -241,10 +242,11 @@ class LeftSideBar extends Component {
       loading: true,
     });
 
-    const categoryId = this.props.location?.state?.category_ids || "";
-    store.dispatch(getAllProducts(categoryId, this.setLoading));
+    const categoryId = this.props.location?.state?.category_ids || null;
+    const productId = this.props.location?.state?.product_id || null;
+    // const productId = false || null;
+    store.dispatch(getAllProducts(categoryId, productId,this.setLoading));
     store.dispatch(getProductCategory());
-
     store.dispatch(
       changeRouteName([{ routeName: this.props.pathName }])
     );
@@ -351,7 +353,7 @@ class LeftSideBar extends Component {
                 height: "100vh",
               }}
             >
-              <Loader />
+              <LoaderSpinner />
             </div>
           </div>
         ) : (

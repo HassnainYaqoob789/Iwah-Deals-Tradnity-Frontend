@@ -11,12 +11,17 @@ var CryptoJS = require("crypto-js");
 const check_login = localStorage.getItem("customerData");
 const TIMEOUT = 100
 export default {
-  getProducts: (cb, categoryId = null, setLoading, timeout) => {
+  getProducts: (cb, categoryId = null, productId = null, setLoading, timeout) => {
     let apiUrl = url.temp_url + url.getnewProducts;
-
+    console.log("producidjee", categoryId, productId)
     // Agar category ID hai to URL mein add karein
     if (categoryId) {
-      apiUrl += `${categoryId}`;
+      apiUrl += `&category_id=${categoryId}`;
+    }
+
+    // Agar productId bhi bhejni hai
+    if (productId) {
+      apiUrl += `&product_id=${productId}`;
     }
 
     if (document.querySelector(".loader-wrapper")) {
@@ -202,6 +207,103 @@ export default {
         cb(err?.response?.status);
       });
   },
+
+
+  CallEngine_productByCollection3: (payload, cb) => {
+
+    getData(
+      url.base_url + url.productByCollection3_api + objectToQueryString(payload?.paramsObj || {})
+    )
+      .then(async res => {
+
+        let data = [];
+        await res.data.data.map((d) => {
+
+          var img = d.images[0].url
+          var bas_img = d.images[0].small_image_url
+          var pro_img = d.images[0].path ? img : bas_img
+          var obj = {};
+          obj.id = d.id;
+          obj.name = d.name;
+          obj.price = d.formated_price || d.formated_price;
+          obj.discount = d.CampaignId;
+          obj.features = d.Features;
+          obj.pictures = pro_img;
+          obj.shortDetails = d.short_description;
+          obj.description = d.description;
+          obj.stock = 1000;
+          obj.new = true;
+          obj.isfeatured = true;
+          obj.category = (d.Category) ? d.Category : [];
+          obj.country = 'Pakistan';
+          obj.rating = 5;
+          obj.api = d;
+          obj.wishlist = d.is_wishlisted;
+          obj.productCode = d.ProductCode;
+          data.push(obj);
+          return null
+        });
+        if (payload?.setLoading) {
+          payload.setLoading(false);
+        }
+        cb(data);
+      })
+      .catch((err) => {
+        if (payload?.setLoading) {
+          payload.setLoading(false);
+        }
+        cb(err?.response?.status);
+      });
+  },
+
+
+  CallEngine_peopleViewedProduct: (payload, cb) => {
+
+    getData(
+      url.base_url + url.peopleViewProduct_api + objectToQueryString(payload?.paramsObj || {})
+    )
+      .then(async res => {
+        let data = [];
+        await res.data.data.map((d) => {
+          var img = d.images[0].url
+          var bas_img = d.images[0].small_image_url
+          var pro_img = d.images[0].path ? img : bas_img
+          var obj = {};
+          obj.id = d.id;
+          obj.name = d.name;
+          obj.price = d.formated_price || d.formated_price;
+          obj.discount = d.CampaignId;
+          obj.features = d.Features;
+          obj.pictures = pro_img;
+          obj.shortDetails = d.short_description;
+          obj.description = d.description;
+          obj.stock = 1000;
+          obj.new = true;
+          obj.isfeatured = true;
+          obj.category = (d.Category) ? d.Category : [];
+          obj.country = 'Pakistan';
+          obj.rating = 5;
+          obj.api = d;
+          obj.wishlist = d.is_wishlisted;
+          obj.productCode = d.ProductCode;
+          data.push(obj);
+          return null
+        });
+        if (payload?.setLoading) {
+          payload.setLoading(false);
+        }
+        cb(data);
+      })
+      .catch((err) => {
+        if (payload?.setLoading) {
+          payload.setLoading(false);
+        }
+        cb(err?.response?.status);
+      });
+  },
+
+
+
 
 
 
@@ -1322,8 +1424,8 @@ export default {
   CancelOrder: (payload, cb, timeout) => {
 
     postData(url.temp_url + url.orderCancel + payload + `?token=true&currency=${localStorage.getItem("changeCurrencies")
-        ? localStorage.getItem("changeCurrencies")
-        : localStorage.getItem("defaultDataaa")
+      ? localStorage.getItem("changeCurrencies")
+      : localStorage.getItem("defaultDataaa")
       }`)
       .then(async res => {
         cb(res.data);

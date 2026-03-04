@@ -46,7 +46,7 @@ class ProductItem extends Component {
   }
 
   render() {
-    const { product, appconfigs, category_ids, clickedReload } = this.props;
+    const { product, appconfigs, category_ids, clickedReload, product_ids } = this.props;
     const { wishList } = this.state;
 
     const colorCodes = localStorage.getItem("color_theme");
@@ -82,7 +82,7 @@ class ProductItem extends Component {
             <Link
               to={{
                 pathname: productUrl,
-                state: { category_ids: category_ids }
+                state: { category_ids: category_ids, product_id: product_ids }
               }}
               onClick={(e) => {
                 if (clickedReload === true) {
@@ -195,7 +195,7 @@ class ProductItem extends Component {
           width={1000}
           zIndex={999999999999}
         >
-          <LeftSidebar url={product?.api?.url_key} CutLoading={this.state.show} />
+          {/* <LeftSidebar url={product?.api?.url_key} CutLoading={this.state.show} /> */}
         </Modal >
       </>
     );

@@ -9,7 +9,7 @@ export const Product2a = {
     autoplaySpeed: 3000,
     cssEase: "linear",
 
-  
+
     responsive: [
         {
             breakpoint: 2250,
@@ -57,16 +57,15 @@ export const Product2a = {
 }
 export const Product4 = {
     infinite: true,
-    speed: 300,
+    speed: 1200,              // slow & smooth transition
     slidesToShow: 8,
     slidesToScroll: 1,
     autoplay: true,
     arrows: true,
     adaptiveHeight: true,
-    autoplaySpeed: 1800,
-    cssEase: "linear",
+    autoplaySpeed: 2400,      // more breathing space
+    cssEase: "ease-in-out",   // natural movement feel
 
-  
     responsive: [
         {
             breakpoint: 2250,
@@ -111,7 +110,7 @@ export const Product4 = {
             }
         }
     ]
-}
+};
 
 export const Product433 = {
     infinite: true,

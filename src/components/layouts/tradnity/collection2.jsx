@@ -15,6 +15,7 @@ import {
 } from "../../../actions";
 import ProductItem from "./product-item";
 import "./proCard.css";
+import "./collection.css";  /* bring in shared collection styles including .col-see-all-link */
 import Loader from "../../../svg_code/loader";
 import history from "../../../history";
 
@@ -64,38 +65,62 @@ class Collection2 extends Component {
     const featured = products;
     return (
       <div>
-        {SeeAllProductsBtnCdn ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
+        {/* Header row with title & button on same line */}
+        <div
+          className="col2-header-row"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingTop: "1rem",               /* 16px */
+            paddingBottom: "0px",             /* 16px */
+            paddingLeft: "1rem",               /* 16px */
+            paddingRight: "1rem",              /* 16px */
+            // marginBottom: "1rem",              /* 16px */
+            gap: "1.5rem",                     /* 24px */
+          }}
+        >
+          {/* Title & Subtitle group */}
+          <div style={{ flex: 1 }}>
+            <span
+              className="title-inner1 mob-heading"
+              style={{
+                fontSize: "1.375rem", /* 22px */
+                fontFamily: "Poppins",
+                fontWeight: "600",
+              }}
+            >
+              {title}
+            </span>
+            {subtitle ? (
+              <span
+                style={{
+                  fontSize: "1rem", /* 16px */
+                  fontFamily: "Poppins",
+                  fontWeight: "400",
+                }}
+              >
+                {" "}( {subtitle})
+              </span>
+            ) : null}
+          </div>
+
+          {/* See All Products button */}
+          {SeeAllProductsBtnCdn ? (
             <Link
               to={{
                 pathname: "/shopPage",
                 state: { categories: objshopPage },
               }}
-              style={{
-                textDecoration: "none",
-                fontSize: "12px",
-                padding: "8px 16px",
-                border: "1.5px solid #f98814",
-                borderRadius: "6px",
-                color: "#f98814",
-                fontWeight: "600",
-                transition: "all 0.3s ease",
-                borderRadius: "20px"
-
-              }}
+              className="col-see-all-link"
             >
               See All Products
             </Link>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
+
         <section
-          className="section-b-space j-box pets-box ratio_square"
+          className="j-box pets-box ratio_square"
           style={{
             /* ✅ width: 100% — let the PARENT wrapper in TradnityMain control the width.
                Removed hardcoded "85%" that was misaligning with banners above. */
@@ -104,37 +129,15 @@ class Collection2 extends Component {
             overflow: "visible",
             paddingLeft: 0,
             paddingRight: 0,
+            paddingTop: "0.625rem", /* 10px */
+            paddingBottom: "1.25rem", /* 20px */
           }}
         >
-
-
           <div className="row">
             <div className="col">
-              {/* Title row */}
-              <div className="mt-2 mb-2" style={{ paddingLeft: "4px" }}>
-                <span
-                  className="title-inner1 mob-heading"
-                  style={{
-                    fontSize: "22px",
-                    fontFamily: "Poppins",
-                    fontWeight: "600",
-                  }}
-                >
-                  {title}
-                </span>
-                {subtitle ? (
-                  <span
-                    style={{
-                      fontSize: "16px",
-                      fontFamily: "Poppins",
-                      fontWeight: "400",
-                    }}
-                  >
-                    {" "}( {subtitle})
-                  </span>
-                ) : null}
+              <div style={{ display: "none" }}>
+                {/* Title & subtitle now in header above, keeping this for backward compatibility if needed */}
               </div>
-
               {featured && featured.length !== 0 ? (
                 <Slider
                   {...Product4}
@@ -145,6 +148,7 @@ class Collection2 extends Component {
                     <div key={index}>
                       <ProductItem
                         product={product}
+                        product_ids={product?.id || ""}
                         symbol={symbol}
                         onAddToCompareClicked={() => addToCompare(product)}
                         onAddToWishlistClicked={() =>
@@ -162,8 +166,8 @@ class Collection2 extends Component {
                 <div
                   style={{
                     textAlign: "center",
-                    marginTop: "7%",
-                    marginBottom: "7%",
+                    marginTop: "1.25rem",
+                    marginBottom: "1.25rem",
                   }}
                 >
                   <Loader />

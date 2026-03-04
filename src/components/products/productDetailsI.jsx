@@ -12,6 +12,7 @@ import Demoimg from "../../assets/images/placeholder.gif";
 import Collection3 from "../layouts/tradnity/collection3";
 import Heart from "react-heart";
 import Loader from "../../svg_code/loader";
+import LoaderSpinner from "../../components/loadingspin"
 
 import React, { useEffect, useRef, useState } from "react";
 import Service from "./common/service";
@@ -551,8 +552,10 @@ const ProductDetailsMe = (props) => {
       parsedColorCodes && parsedColorCodes !== null
         ? parsedColorCodes
         : appconfigs;
-    let categoryId = locaaaa?.state?.category_ids || ""
-    store.dispatch(getAllProducts(categoryId, setLoadingSSSS));
+    let categoryId = locaaaa?.state?.category_ids || null;
+    let productId = locaaaa?.state?.product_id || null;
+    // let productId = false || null;
+    store.dispatch(getAllProducts(categoryId, productId, setLoadingSSSS));
   }, [contactDetails, colorCodes]);
 
   document.querySelector(".loader-wrapper").style = "display: none";
@@ -570,7 +573,7 @@ const ProductDetailsMe = (props) => {
           height: "100vh",          // viewport height
         }}
       >
-        <Loader />
+        <LoaderSpinner />
       </div>
     );
   }
@@ -1229,8 +1232,8 @@ const ProductDetailsMe = (props) => {
 
         {!shortView && (
           <div className="my-5">
-            <Collection3 pathName={pathName} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} />
-            <PeopleViewed pathName={pathName} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} />
+            <Collection3 pathName={pathName} maincompLoading={LoadingSSS} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} ProductCategories={item?.api?.Category} />
+            <PeopleViewed pathName={pathName} maincompLoading={LoadingSSS} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} ProductCategories={item?.api?.Category} />
           </div>
         )}
       </div>

@@ -19,22 +19,24 @@ const ProductImagesSlider = (props) => {
   const [allUrl, setAllUrl] = useState([...videoUrl, ...props.images]);
 
   const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return false;
-    return window.matchMedia("(max-width: 767px)").matches;
+    if (typeof window === "undefined") return false;
+    const narrow = window.innerWidth <= 767 || (window.matchMedia && window.matchMedia("(max-width: 767px)").matches);
+    return narrow;
   });
+  // state for mobile image popup
+  const [modalImage, setModalImage] = useState(null);
+
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mql = window.matchMedia("(max-width: 767px)");
-    const onChange = () => setIsMobile(mql.matches);
-
-    onChange();
-    if (mql.addEventListener) mql.addEventListener("change", onChange);
-    else mql.addListener(onChange);
-
+    if (typeof window === "undefined") return;
+    const onResize = () => {
+      const narrow = window.innerWidth <= 767;
+      setIsMobile(narrow);
+    };
+    window.addEventListener("resize", onResize);
+    onResize();
     return () => {
-      if (mql.removeEventListener) mql.removeEventListener("change", onChange);
-      else mql.removeListener(onChange);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -82,23 +84,92 @@ const ProductImagesSlider = (props) => {
                       </video>
                     </div>
                   ) : (
-                    <Magnifier
-                      className="setHeight"
-                      height="30em"
-                      src={
-                        item && typeof item == "string"
-                          ? item
-                          : item.original_image_url
+                    // when on mobile we allow click to open a standalone image
+                    <div
+                      className="mobile-magnifier-container"
+                      onClick={(e) => {
+                        if (isMobile) {
+                          const srcValue =
+                            item && typeof item == "string"
+                              ? item
+                              : item.original_image_url
+                              ? item.original_image_url
+                              : Placeholder;
+                          setModalImage(srcValue);
+                        }
+                      }}
+                      onTouchEnd={(e) => {
+                        if (isMobile) {
+                          const srcValue =
+                            item && typeof item == "string"
+                              ? item
+                              : item.original_image_url
+                              ? item.original_image_url
+                              : Placeholder;
+                          setModalImage(srcValue);
+                        }
+                      }}
+                    >
+                      <Magnifier
+                        key={
+                          item && typeof item === "string"
+                            ? item
+                            : item && item.original_image_url
                             ? item.original_image_url
-                            : Placeholder
-                      }
-                      width="100%"
-                    />
+                            : item && item.video_url
+                            ? item.video_url
+                            : undefined
+                        }
+                        className="setHeight"
+                        /* on mobile fill parent, on desktop keep reasonable fixed height so the magnifier logic works */
+                        height={isMobile ? "100%" : "30em"}
+                        src={
+                          item && typeof item == "string"
+                            ? item
+                            : item.original_image_url
+                              ? item.original_image_url
+                              : Placeholder
+                        }
+                        width="100%"
+                        onClick={() => {
+                          if (isMobile) {
+                            const srcValue =
+                              item && typeof item == "string"
+                                ? item
+                                : item.original_image_url
+                                ? item.original_image_url
+                                : Placeholder;
+                            setModalImage(srcValue);
+                          }
+                        }}
+                        onTouchEnd={(e) => {
+                          // also respond to touch events
+                          if (isMobile) {
+                            const srcValue =
+                              item && typeof item == "string"
+                                ? item
+                                : item.original_image_url
+                                ? item.original_image_url
+                                : Placeholder;
+                            setModalImage(srcValue);
+                          }
+                        }}
+                      />
+                    </div>
                   )}
                 </SwiperSlide>
               );
             })}
         </Swiper>
+        {/* modal overlay should sit outside the Swiper components to avoid being clipped */}
+        {modalImage && (
+          <div
+            className="image-modal"
+            onClick={() => setModalImage(null)}
+          >
+            <img src={modalImage} alt="enlarged" />
+          </div>
+        )}
         <Swiper
           onSwiper={setActiveThumb}
           loop={true}
@@ -115,6 +186,8 @@ const ProductImagesSlider = (props) => {
           modules={[Navigation, Thumbs]}
           className="product-images-slider-thumbs"
         >
+        {/* end of main slider */}
+
           {props &&
             props.images &&
             props.images.length !== 0 &&
