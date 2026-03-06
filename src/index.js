@@ -68,7 +68,7 @@ const shopAlgoliaA = loadable(() => import('./components/pages/shopAlgoliaA'));
 
 
 
-const ViewTracking  = loadable(() => import('./components/pages/viewTracking'));
+const ViewTracking = loadable(() => import('./components/pages/viewTracking'));
 const wishList = loadable(() => import('./components/wishlist'))
 const Login = loadable(() => import('./components/pages/login'))
 const Dashboard = loadable(() => import('./components/pages/dashboard'))
@@ -100,13 +100,13 @@ const ChangePasswordP = loadable(() => import('./components/pages/ChangePassword
 
 
 
-const Root =  () => {
-        
+const Root = () => {
+
         const decryptedData = localStorage.getItem("customerData")
-        const [headerType,setHeaderType]=useState(null)  
-        
+        const [headerType, setHeaderType] = useState(null)
+
         const RunDispatch = () => {
-                
+
 
 
                 ReactGA.initialize('UA-235248904-1');
@@ -114,13 +114,13 @@ const Root =  () => {
 
 
 
-              
+
                 store.dispatch(getMainScreenText());
                 store.dispatch(getFooterIcons());
                 store.dispatch(getCurrencies());
                 store.dispatch(ChangeCurrences());
                 store.dispatch(getAppConfig());
-                
+
                 if (decryptedData) {
                         store.dispatch(getcustomer());
                         store.dispatch(getAddress());
@@ -132,37 +132,37 @@ const Root =  () => {
                 store.dispatch(getCartData());
                 store.dispatch(recieveSliderimages());
                 store.dispatch(fetchHomeBanner());
-                
-                
+
+
                 store.dispatch(fetchOrigin());
                 // store.dispatch(fetchBestSeller());
                 store.dispatch(getContactDetail());
-                
-                
-         
+
+
+
 
                 store.dispatch(fetchMenu());
 
-                
+
                 store.dispatch(getSocialLink());
                 store.dispatch(getProductCategory());
-                
-                
+
+
 
                 ReactGA.pageview(window.location.pathname);
                 ReactPixel.pageView(window.location.pathname);
 
-                                
+
         }
 
-        
-        
 
 
-        
+
+
+
         let colorCodesa = localStorage.getItem("color_theme")
         let parsedColorCodesa = colorCodesa && (colorCodesa !== undefined) && JSON.parse(colorCodesa)
-        
+
 
 
         // if (document.querySelector(".loader-wrapper").style.display !== "none") {
@@ -173,164 +173,158 @@ const Root =  () => {
 
         useEffect(() => {
                 const handleVisibilityChange = () => {
-                  document.title = document.visibilityState === 'visible'
-                    ? 'Welcome back!'
-                    : 'Come back .';
-                    
+                        document.title = document.visibilityState === 'visible'
+                                ? 'Welcome back!'
+                                : 'Come back .';
+
                 };
                 // Add event listener when component mounts
                 document.addEventListener('visibilitychange', handleVisibilityChange);
                 // Remove event listener when component unmounts
                 return () => {
-                  document.removeEventListener('visibilitychange', handleVisibilityChange);
+                        document.removeEventListener('visibilitychange', handleVisibilityChange);
                 };
                 // console.log("kksthththtj",document)
-              }, []);
+        }, []);
 
-        
+
         useEffect(() => {
                 // store.dispatch(getAllProducts());
-                
+
                 document.getElementById("color").setAttribute("href", '../assets/css/color18.css');
-               
+
                 const colorCodes = localStorage.getItem("color_theme");
                 let parsedColorCodes = colorCodes && (colorCodes !== undefined) && JSON.parse(colorCodes);
                 colorCodes && document.querySelector(":root").style.setProperty('--primary-theme-color', parsedColorCodes.color);
                 colorCodes && document.querySelector(":root").style.setProperty('--primary-theme-color_rgb', parsedColorCodes.color_rgb);
 
                 document.querySelector(".loader-wrapper").style = "background-color: rgba(255, 255, 255, 1)";
-              
+
                 axios.get(base_url + appConfig)
-                .then(res => {
-                localStorage.setItem("categeories",res.data.data.category_type)
-                  const configData = res.data;
-                  localStorage.setItem('color_theme', JSON.stringify(configData?.data));
-                  
-                  document.querySelector(":root").style.setProperty('--primary-theme-color', configData?.data.color);
-                
-                  document.querySelector(":root").style.setProperty('--primary-theme-color_rgb', configData?.data.color_rgb);
-                  
-                  
-                  var r1 = parseInt(String(configData?.data.color).substr(1,2),16);
-                  var g1 = parseInt(String(configData?.data.color).substr(3,2),16);
-                  var b1 = parseInt(String(configData?.data.color).substr(5,2),16);
-                
-                  // calculate relative luminance using sRGB formula
-                  var luminance1 = 0.2126 * Math.pow(r1/255, 2.2) + 0.7152 * Math.pow(g1/255, 2.2) + 0.0722 * Math.pow(b1/255, 2.2);
-                  
-                  let finalDec1 = (luminance1 > 0.5) ? '#000' : '#fff';
-                  
-                  document.querySelector(":root").style.setProperty('--primary-theme-slider_color', finalDec1);
-                  setHeaderType(configData)
-                                   
-                })
-                
+                        .then(res => {
+                                localStorage.setItem("categeories", res.data.data.category_type)
+                                const configData = res.data;
+                                localStorage.setItem('color_theme', JSON.stringify(configData?.data));
+
+                                document.querySelector(":root").style.setProperty('--primary-theme-color', configData?.data.color);
+
+                                document.querySelector(":root").style.setProperty('--primary-theme-color_rgb', configData?.data.color_rgb);
+
+
+                                var r1 = parseInt(String(configData?.data.color).substr(1, 2), 16);
+                                var g1 = parseInt(String(configData?.data.color).substr(3, 2), 16);
+                                var b1 = parseInt(String(configData?.data.color).substr(5, 2), 16);
+
+                                // calculate relative luminance using sRGB formula
+                                var luminance1 = 0.2126 * Math.pow(r1 / 255, 2.2) + 0.7152 * Math.pow(g1 / 255, 2.2) + 0.0722 * Math.pow(b1 / 255, 2.2);
+
+                                let finalDec1 = (luminance1 > 0.5) ? '#000' : '#fff';
+
+                                document.querySelector(":root").style.setProperty('--primary-theme-slider_color', finalDec1);
+                                setHeaderType(configData)
+
+                        })
+
                 colorCodesa = localStorage.getItem("color_theme")
-                parsedColorCodesa = colorCodes  && (colorCodes !== undefined) && JSON.parse(colorCodesa)
+                parsedColorCodesa = colorCodes && (colorCodes !== undefined) && JSON.parse(colorCodesa)
                 colorCodesa && document.querySelector(":root").style.setProperty('--primary-theme-color', parsedColorCodesa.color);
                 colorCodesa && document.querySelector(":root").style.setProperty('--primary-theme-color_rgb', parsedColorCodesa.color_rgb);
 
                 RunDispatch();
-                setTimeout(()=>{
-                        document.querySelector(".loader-wrapper").style = "display:none";
-                },5000);
+                // setTimeout(() => {
+                //         document.querySelector(".loader-wrapper").style = "display:none";
+                // }, 5000);
         }, [])
-
-        setTimeout(()=>{
-
-                // console.clear();
-        },4000);
-
 
         return (
 
                 <Provider store={store}>
 
 
-                        <Router  history={history} basename={'/'} >
-<>
+                        <Router history={history} basename={'/'} >
+                                <>
 
-                                <HeaderThree headerType={headerType}/>
+                                        <HeaderThree headerType={headerType} />
 
-                                <ScrollContext>
+                                        <ScrollContext>
 
-<div className={`main_root ${headerType?headerType?.data?.header_type==1? "":"header_type2":""}`} style={{minHeight:"100vh", marginTop: headerType?headerType?.data?.header_type==1? "8%":"5%":"8%"}}>
+                                                <div className={`main_root ${headerType ? headerType?.data?.header_type == 1 ? "" : "header_type2" : ""}`} style={{ minHeight: "100vh", marginTop: headerType ? headerType?.data?.header_type == 1 ? "8%" : "5%" : "8%" }}>
 
-                                        <Switch>
+                                                        <Switch>
 
-                                                <Route exact path="/" component={TradnityMain} />
+                                                                <Route exact path="/" component={TradnityMain} />
 
-                                                {/* <Layout> */}
-
-
-                                                        <Route exact path="/product/:id" component={LeftSideBar} />
+                                                                {/* <Layout> */}
 
 
-                                                        <Route exact path="/cart-sidebar" component={CartSidebars} />
-                                                        {/*Routes For custom Features*/}
-                                                        <Route path="/cart" component={Cart} />
-                                                        <Route path="/otp" exact component={Otp} />
-                                                        {/* {parsedColorCodesa && parsedColorCodesa?.navbar_wishlist && (parsedColorCodesa.navbar_wishlist === 1)
+                                                                <Route exact path="/product/:id" component={LeftSideBar} />
+
+
+                                                                <Route exact path="/cart-sidebar" component={CartSidebars} />
+                                                                {/*Routes For custom Features*/}
+                                                                <Route path="/cart" component={Cart} />
+                                                                <Route path="/otp" exact component={Otp} />
+                                                                {/* {parsedColorCodesa && parsedColorCodesa?.navbar_wishlist && (parsedColorCodesa.navbar_wishlist === 1)
 											? */}
-                                                        <PrivateRoute path="/wishlist" component={wishList} />
-{/* :null} */}
-                                                        <PrivateRoute path="/myOrders" component={MyOrders} />
-                                                        <Route path="/privacy-policy" component={PrivacyPolicy} />
-                                                        <Route path="/terms" component={TermsandCondition} />
+                                                                <PrivateRoute path="/wishlist" component={wishList} />
+                                                                {/* :null} */}
+                                                                <PrivateRoute path="/myOrders" component={MyOrders} />
+                                                                <Route path="/privacy-policy" component={PrivacyPolicy} />
+                                                                <Route path="/terms" component={TermsandCondition} />
 
 
 
-                                                        <PrivateRoute path="/viewDetails" component={ViewDetails} />
-                                                        <Route path="/shopPage" component={shopAlgoliaA} />
-                                                        <Route path="/NewForgetPassword" component={NewForgetPassword} />
-                                                        <Route path="/cartitem" component={CustomizedTooltips} />
+                                                                <PrivateRoute path="/viewDetails" component={ViewDetails} />
+                                                                <Route path="/shopPage" component={shopAlgoliaA} />
+                                                                <Route path="/NewForgetPassword" component={NewForgetPassword} />
+                                                                <Route path="/cartitem" component={CustomizedTooltips} />
 
 
-                                                        <Route path="/ForgetOtp" component={ForgetOtp} />
+                                                                <Route path="/ForgetOtp" component={ForgetOtp} />
 
-                                                        {/*Routes For Extra Pages*/}
-                                                        {/* {parsedColorCodesa && parsedColorCodesa?.nav_about && (parsedColorCodesa.nav_about === 1)
+                                                                {/*Routes For Extra Pages*/}
+                                                                {/* {parsedColorCodesa && parsedColorCodesa?.nav_about && (parsedColorCodesa.nav_about === 1)
 											? */}
-                                                        <Route path="/about-us" component={aboutUs} />
-{/*  :null} */}
-                                                        <Route path="/orderNumber" component={OrderNumber} />
+                                                                <Route path="/about-us" component={aboutUs} />
+                                                                {/*  :null} */}
+                                                                <Route path="/orderNumber" component={OrderNumber} />
 
 
-                                                        <Route path="/login" component={Login} />
-                                                        {/* {parsedColorCodesa && parsedColorCodesa?.nav_about && (parsedColorCodesa.nav_about === 1)
+                                                                <Route path="/login" component={Login} />
+                                                                {/* {parsedColorCodesa && parsedColorCodesa?.nav_about && (parsedColorCodesa.nav_about === 1)
 							? */}
-                                                        <Route path="/contact" component={Contact} />
-                                                        {/* :null} */}
-                                                        <Route path="/register" component={registerForm} />
-                                                        <PrivateRoute path="/dashboard" component={Dashboard} />
-                                                        <PrivateRoute path="/address" component={Address} />
-                                                        <PrivateRoute path="/add_address" component={Add_Address} />
-                                                        <Route path="/ShippingOptions" component={ShippingOptions} />
-                                                        <Route path="/trackOrder" component={ViewTracking} />
-                                                        <Route path="/BillingOptions" component={BillingOptions} />
-                                                        <PrivateRoute path="/addressEdit" component={AddressEdit} />
-                                                        <PrivateRoute path="/addressCard" component={AddressCard} />
+                                                                <Route path="/contact" component={Contact} />
+                                                                {/* :null} */}
+                                                                <Route path="/register" component={registerForm} />
+                                                                <PrivateRoute path="/dashboard" component={Dashboard} />
+                                                                <PrivateRoute path="/address" component={Address} />
+                                                                <PrivateRoute path="/add_address" component={Add_Address} />
+                                                                <Route path="/ShippingOptions" component={ShippingOptions} />
+                                                                <Route path="/trackOrder" component={ViewTracking} />
+                                                                <Route path="/BillingOptions" component={BillingOptions} />
+                                                                <PrivateRoute path="/addressEdit" component={AddressEdit} />
+                                                                <PrivateRoute path="/addressCard" component={AddressCard} />
 
-                                                        <PrivateRoute path="/profileDetails" component={ProfileDetails} />
-                                                        <PrivateRoute path="/ChangePassword" component={ChangePasswordP} />
-                                                        <Route path="/forgetPassword" component={ForgetPassword} />
-                                                        <Route path="/stripepayment" component={StripePayment} />
-                                                        <Route path="/user_email" component={Fbemail} />
-
-
-                                                {/* </Layout> */}
-
-                                                <Route exact path="*" component={PageNF} />
-
-                                        </Switch>
-                                        </div>
+                                                                <PrivateRoute path="/profileDetails" component={ProfileDetails} />
+                                                                <PrivateRoute path="/ChangePassword" component={ChangePasswordP} />
+                                                                <Route path="/forgetPassword" component={ForgetPassword} />
+                                                                <Route path="/stripepayment" component={StripePayment} />
+                                                                <Route path="/user_email" component={Fbemail} />
 
 
+                                                                {/* </Layout> */}
 
-                                </ScrollContext>
-      
+                                                                <Route exact path="*" component={PageNF} />
+
+                                                        </Switch>
+                                                </div>
+
+
+
+                                        </ScrollContext>
+
                                         <FooterFour />
-</>
+                                </>
 
                         </Router>
 

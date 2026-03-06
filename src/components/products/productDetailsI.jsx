@@ -560,7 +560,7 @@ const ProductDetailsMe = (props) => {
         ? parsedColorCodes
         : appconfigs;
 
-
+    setLoadingSSSS(true)
     const categoryPId = getNumberFromQuery(queryParams.get("category"));
     const productPId = getNumberFromQuery(queryParams.get("product"));
 

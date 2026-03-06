@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./carousel.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
@@ -26,20 +26,34 @@ const TradnityCarousel = (props) => {
 
         <Slider {...SliderH} className="slide-1 home-slider">
           {image &&
-          image.sliderImages &&
-          image.sliderImages.data &&
-          image.sliderImages.data.length !== 0 ? (
+            image.sliderImages &&
+            image.sliderImages.data &&
+            image.sliderImages.data.length !== 0 ? (
             image.sliderImages.data.map((img, key) => {
               return (
                 <div key={key}>
-                  {/* <Link
+                  <Link
                     style={
                       loadingCarousel
                         ? { display: "none" }
                         : { display: "block" }
                     }
-                    to={{ pathname: "/shopPage", state: { slider: img } }}
-                  > */}
+                    // to={{ pathname: "/shopPage", state: { categories: { id: img?.slider_product, image_url: img?.category_image, name: img?.category_name } } }}
+                    to={
+                      img?.slider_product == 1
+                        ? "/shopPage" // agar slider_product 1 hai to state nahi jaayega
+                        : {
+                          pathname: "/shopPage",
+                          state: {
+                            categories: {
+                              id: img?.slider_product,
+                              image_url: img?.category_image,
+                              name: img?.category_name,
+                            },
+                          },
+                        }
+                    }
+                  >
                     <img
                       width="100vw"
                       className="carouselImg"
@@ -47,7 +61,7 @@ const TradnityCarousel = (props) => {
                       onLoad={() => imageLoaded()}
                       alt="Slider 1"
                     />
-                  {/* </Link> */}
+                  </Link>
                 </div>
               );
             })

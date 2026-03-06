@@ -55,13 +55,13 @@ class Collection2 extends Component {
       store.dispatch(addItemToCart(item));
     }
 
-    const { items, symbol, addToCompare, title, subtitle, categoryID, SeeAllProductsBtnCdn } = this.props;
+    const { items, symbol, addToCompare, title, subtitle, categoryID, SeeAllProductsBtnCdn, getallcategories } = this.props;
     const { products, loading } = this.state;
 
     if (items && items.length === 0) {
       setTimeout(() => { this.setState({ loading: false }); }, 5000);
     }
-    let objshopPage = { id: categoryID }
+    let objshopPage = getallcategories?.data?.filter((e) => e?.id == categoryID)[0] || {};
     const featured = products;
     return (
       <div>
@@ -187,6 +187,8 @@ function mapStateToProps(state) {
     items: state?.data?.deals,
     getcatebyproducts: state.categoryByProducts.getcatebyproducts,
     symbol: state.data.symbol,
+    getallcategories: state.data.getCategory,
+
   };
 }
 

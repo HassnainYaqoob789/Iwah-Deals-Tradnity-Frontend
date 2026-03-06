@@ -199,7 +199,15 @@ class CartSidebars extends Component {
         {cartData.items ? (
           <div className="cart-flow my-5">
             <Box
-              sx={{ width: "100%", paddingTop: "3%" }}
+              sx={{
+                width: "100%",
+                pt: {
+                  xs: "12%",  // mobile
+                  sm: "12%",  // small devices
+                  md: "4%",   // tablets and up
+                  lg: "4%",   // large screens
+                },
+              }}
               root={{ color: "green" }}
             >
               <Stepper

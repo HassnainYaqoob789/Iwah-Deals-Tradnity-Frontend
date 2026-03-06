@@ -6,10 +6,13 @@ import Cookies from "js-cookie";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Product4 } from "../../../services/script";
 import history from "../../../history";
-import Imgbannerone from "../../../assets/images/banners/webBanner4.jpg";
-import banner2 from "../../../assets/images/banners/arabic_banner2.png";
-import banner3 from "../../../assets/images/banners/tech_banner3.png";
-import banner4 from "../../../assets/images/banners/banner4.png";
+import womeneastern2 from "../../../assets/images/EASTERN FEMALE banner.png";
+import menarabicImg from "../../../assets/images/menarabic22.png";
+import menarabicImg2 from "../../../assets/images/12.png";
+import menarabicImgWomenAccess from "../../../assets/images/Women accessories.png";
+import menarabicImgMenAccess from "../../../assets/images/Men accessories.png";
+import gadgetsNewImg from "../../../assets/images/gadgetnews.png";
+import houseHoldGadgets from "../../../assets/images/House Hold Gadgets.png";
 import banner5 from "../../../assets/images/banners/impression_banner5.png";
 import banner1 from "../../../assets/images/banners/eastern_banner1.png";
 import Placeholder from "../../../svg_code/placeholder";
@@ -155,6 +158,7 @@ class TradnityMain extends Component {
       user,
       appconfigs,
       getcatebyproducts,
+      getallcategories,
       symbol,
     } = this.props;
     const {
@@ -234,6 +238,15 @@ class TradnityMain extends Component {
       store.dispatch(addItemToCart(item));
     }
 
+    let obj9shopPage = getallcategories?.data?.filter((e) => e?.id == "9")[0] || {};
+    let obj10shopPage = getallcategories?.data?.filter((e) => e?.id == "10")[0] || {};
+    let obj13shopPage = getallcategories?.data?.filter((e) => e?.id == "13")[0] || {};
+    let obj15shopPage = getallcategories?.data?.filter((e) => e?.id == "15")[0] || {};
+    let obj12shopPage = getallcategories?.data?.filter((e) => e?.id == "12")[0] || {};
+    let obj20shopPage = getallcategories?.data?.filter((e) => e?.id == "20")[0] || {};
+    let obj6shopPage = getallcategories?.data?.filter((e) => e?.id == "6")[0] || {};
+    let obj17shopPage = getallcategories?.data?.filter((e) => e?.id == "17")[0] || {};
+
     const items = [
 
       /* ── 1. Main carousel ── */
@@ -243,7 +256,7 @@ class TradnityMain extends Component {
         text:
           appconfig?.slider === 1 ? (
             /* No horizontal padding on the full-bleed slider */
-            <div style={{ width: "100%", margin: "0", ...V_GAP, padding: 0 }}>
+            <div style={{ width: "100%", margin: "0", ...V_GAP, padding: 0, marginBottom: "0px !important" }}>
               <TradnityCarousel image={user} />
             </div>
           ) : null,
@@ -255,7 +268,7 @@ class TradnityMain extends Component {
         id: appconfig?.slider_option,
         text:
           appconfig?.slider === 1 ? (
-            <div style={{ ...PAGE_WRAP, ...V_GAP }}>
+            <div style={{ ...PAGE_WRAP, ...V_GAP, marginTop: "0px !important", marginBottom: "0px !important" }}>
               <LazyLoadImage
                 placeholder={<SliderLoader />}
                 className="imgHeightT"
@@ -270,6 +283,8 @@ class TradnityMain extends Component {
       },
 
       /* ── 3. Category icons ── */
+      /* ── 3. Category icons ── */
+      /* ── 3. Category icons ── */
       {
         ids: 3,
         id: appconfig?.slider_option,
@@ -282,10 +297,10 @@ class TradnityMain extends Component {
                     style={{
                       display: "flex",
                       flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "flex-end",
+                      justifyContent: "space-evenly",
+                      alignItems: "flex-start",
                       flexWrap: "wrap",
-                      gap: "clamp(0.75rem, 2vw, 2rem)",
+                      gap: "16px",
                       paddingBottom: "12px",
                       paddingTop: "4px",
                     }}
@@ -294,36 +309,35 @@ class TradnityMain extends Component {
                       <div
                         key={m.id}
                         style={{
-                          flex: "1 1 calc(20% - 2rem)",
-                          minWidth: "120px",
-                          maxWidth: "175px",
                           display: "flex",
                           flexDirection: "column",
                           alignItems: "center",
+                          width: "130px",
                         }}
                       >
                         <Link
                           to={{ pathname: "/shopPage", state: { categories: m } }}
                           style={{ textDecoration: "none", width: "100%" }}
                         >
+                          {/* Icon Box - overflow visible taake image bahar nikale */}
                           <div
                             style={{
+                              width: "130px",
+                              height: "130px",
+                              borderRadius: "20px",
+                              overflow: "visible",
                               position: "relative",
-                              width: "100%",
-                              paddingTop: "97%",
-                              marginTop: "clamp(30px, 5vw, 60px)",
-                              overflow: "hidden", // 👈 VERY IMPORTANT
                             }}
                           >
                             <img
                               loading="lazy"
                               style={{
                                 position: "absolute",
-                                bottom: "0",
+                                bottom: "-41px",
                                 left: "50%",
                                 transform: "translateX(-50%)",
-                                width: "90%",
-                                height: "100%", // 👈 changed from 130%
+                                width: "110%",
+                                height: "145%",
                                 objectFit: "contain",
                                 objectPosition: "bottom",
                                 display: "block",
@@ -333,24 +347,22 @@ class TradnityMain extends Component {
                             />
                           </div>
 
-                          <div className="text-center mt-2">
+                          {/* Category Name */}
+                          <div style={{ textAlign: "center", marginTop: "36px" }}>
                             <h3
                               style={{
                                 textTransform: "uppercase",
-                                fontSize: "clamp(0.65rem, 1.2vw, 0.85rem)",
-                                marginTop: "10px",
-                                marginBottom: "10px",
+                                fontSize: "0.75rem",
+                                margin: "0",
                                 color: "#8B0000",
                                 fontWeight: "700",
                                 lineHeight: "1.3",
                                 letterSpacing: "0.02em",
+                                whiteSpace: "normal",
+                                wordBreak: "break-word",
                               }}
                             >
-                              <strong
-                                style={{ whiteSpace: "normal", wordBreak: "break-word" }}
-                              >
-                                {m.name}
-                              </strong>
+                              {m.name}
                             </h3>
                           </div>
                         </Link>
@@ -392,14 +404,21 @@ class TradnityMain extends Component {
                 <div key={key} style={{ ...PAGE_WRAP, ...V_GAP }}>
                   {/* Banner image */}
                   <div style={BANNER_TO_COLLECTION}>
-                    <LazyLoadImage
-                      placeholder={<SliderLoader />}
-                      className="imgHeightT"
-                      src={res?.image_url}
-                      alt="Banner"
-                      style={BANNER_IMG}
-                      width="100%"
-                    />
+                    <Link
+                      to={{
+                        pathname: "/shopPage",
+                        state: { categories: obj9shopPage },
+                      }}
+                    >
+                      <LazyLoadImage
+                        placeholder={<SliderLoader />}
+                        className="imgHeightT"
+                        src={res?.image_url}
+                        alt="Banner"
+                        style={BANNER_IMG}
+                        width="100%"
+                      />
+                    </Link>
                   </div>
 
                   {/* Arabic Collection – Women (same wrapper = same edges as banner) */}
@@ -412,6 +431,23 @@ class TradnityMain extends Component {
                         categoryID="9"
                         SeeAllProductsBtnCdn={true}
                       />
+                      <div style={BANNER_TO_COLLECTION}>
+                        <Link
+                          to={{
+                            pathname: "/shopPage",
+                            state: { categories: obj10shopPage },
+                          }}
+                        >
+                          <LazyLoadImage
+                            placeholder={<SliderLoader />}
+                            className="imgHeightT"
+                            src={womeneastern2}
+                            alt="Banner"
+                            style={BANNER_IMG}
+                            width="100%"
+                          />
+                        </Link>
+                      </div>
                       <div style={COLLECTION_GAP}>
                         <Collection2
                           type="isfeatured"
@@ -441,14 +477,21 @@ class TradnityMain extends Component {
                 <div key={key} style={{ ...PAGE_WRAP, ...V_GAP }}>
                   {/* Banner image */}
                   <div style={BANNER_TO_COLLECTION}>
-                    <LazyLoadImage
-                      placeholder={<SliderLoader />}
-                      className="imgHeightT"
-                      src={res?.image_url}
-                      alt="Banner"
-                      style={BANNER_IMG}
-                      width="100%"
-                    />
+                    <Link
+                      to={{
+                        pathname: "/shopPage",
+                        state: { categories: obj13shopPage },
+                      }}
+                    >
+                      <LazyLoadImage
+                        placeholder={<SliderLoader />}
+                        className="imgHeightT"
+                        src={menarabicImg}
+                        alt="Banner"
+                        style={BANNER_IMG}
+                        width="100%"
+                      />
+                    </Link>
                   </div>
 
                   {/* Arabic & Eastern – Men (same wrapper = same edges as banner) */}
@@ -462,6 +505,23 @@ class TradnityMain extends Component {
                         SeeAllProductsBtnCdn={true}
 
                       />
+                      <div style={BANNER_TO_COLLECTION}>
+                        <Link
+                          to={{
+                            pathname: "/shopPage",
+                            state: { categories: obj15shopPage },
+                          }}
+                        >
+                          <LazyLoadImage
+                            placeholder={<SliderLoader />}
+                            className="imgHeightT"
+                            src={menarabicImg2}
+                            alt="Banner"
+                            style={BANNER_IMG}
+                            width="100%"
+                          />
+                        </Link>
+                      </div>
                       <div style={COLLECTION_GAP}>
                         <Collection2
                           type="isfeatured"
@@ -488,14 +548,21 @@ class TradnityMain extends Component {
           appconfig?.featured === 1 ? (
             <div style={{ ...PAGE_WRAP, ...V_GAP }}>
               <div style={BANNER_TO_COLLECTION}>
-                <LazyLoadImage
-                  src={banner2}
-                  effect="opacity"
-                  className="pic2-images"
-                  style={BANNER_IMG}
-                  width="100%"
-                  placeholder={<Placeholder />}
-                />
+                <Link
+                  to={{
+                    pathname: "/shopPage",
+                    state: { categories: obj12shopPage },
+                  }}
+                >
+                  <LazyLoadImage
+                    src={menarabicImgWomenAccess}
+                    effect="opacity"
+                    className="pic2-images"
+                    style={BANNER_IMG}
+                    width="100%"
+                    placeholder={<Placeholder />}
+                  />
+                </Link>
               </div>
               <Collection2
                 type="isfeatured"
@@ -505,6 +572,23 @@ class TradnityMain extends Component {
                 SeeAllProductsBtnCdn={true}
 
               />
+              <div style={BANNER_TO_COLLECTION}>
+                <Link
+                  to={{
+                    pathname: "/shopPage",
+                    state: { categories: obj20shopPage },
+                  }}
+                >
+                  <LazyLoadImage
+                    src={menarabicImgMenAccess}
+                    effect="opacity"
+                    className="pic2-images"
+                    style={BANNER_IMG}
+                    width="100%"
+                    placeholder={<Placeholder />}
+                  />
+                </Link>
+              </div>
               <div style={COLLECTION_GAP}>
                 <Collection2
                   type="isfeatured"
@@ -527,18 +611,24 @@ class TradnityMain extends Component {
           appconfig?.featured === 1 ? (
             <div style={{ ...PAGE_WRAP, ...V_GAP }}>
               <div style={BANNER_TO_COLLECTION}>
-                <LazyLoadImage
-                  src={banner3}
-                  effect="opacity"
-                  className="pic2-images"
-                  style={BANNER_IMG}
-                  width="100%"
-                  placeholder={<Placeholder />}
-                />
+                <Link
+                  to={{
+                    pathname: "/shopPage",
+                    state: { categories: obj6shopPage },
+                  }}
+                >
+                  <LazyLoadImage
+                    src={gadgetsNewImg}
+                    effect="opacity"
+                    className="pic2-images"
+                    style={BANNER_IMG}
+                    width="100%"
+                    placeholder={<Placeholder />}
+                  />
+                </Link>
               </div>
               <Collection2 type="isfeatured" title="Gadgets" categoryID="6"
                 SeeAllProductsBtnCdn={true}
-
               />
             </div>
           ) : null,
@@ -552,14 +642,21 @@ class TradnityMain extends Component {
           appconfig?.featured === 1 ? (
             <div style={{ ...PAGE_WRAP, ...V_GAP }}>
               <div style={BANNER_TO_COLLECTION}>
-                <LazyLoadImage
-                  src={banner4}
-                  effect="opacity"
-                  className="pic2-images"
-                  style={BANNER_IMG}
-                  width="100%"
-                  placeholder={<Placeholder />}
-                />
+                <Link
+                  to={{
+                    pathname: "/shopPage",
+                    state: { categories: obj17shopPage },
+                  }}
+                >
+                  <LazyLoadImage
+                    src={houseHoldGadgets}
+                    effect="opacity"
+                    className="pic2-images"
+                    style={BANNER_IMG}
+                    width="100%"
+                    placeholder={<Placeholder />}
+                  />
+                </Link>
               </div>
               <Collection2
                 type="isfeatured"
@@ -620,18 +717,6 @@ class TradnityMain extends Component {
       },
     ];
 
-
-
-
-
-
-
-
-
-
-
-
-
     // const sortedItems = items.sort((a, b) => a.ids - b.ids);
     const sortedItems = [...items].sort((a, b) => a.ids - b.ids);
 
@@ -664,6 +749,8 @@ const mapStateToProps = (state) => ({
   appconfigs: state?.user?.config ?? "",
   getcatebyproducts: state.categoryByProducts.getcatebyproducts,
   symbol: state.data.symbol,
+  getallcategories: state.data.getCategory,
+
 });
 
 export default connect(mapStateToProps)(TradnityMain);

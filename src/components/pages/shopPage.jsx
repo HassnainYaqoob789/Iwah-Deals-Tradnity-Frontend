@@ -107,11 +107,12 @@ const ShopPage = (props) => {
     const categoryId = locationGetData?.state?.categories?.id || null;
     setLoadingSSSS(true)
     // Category ID ke saath products fetch karein
-    store.dispatch(getAllProducts(categoryId, null,setLoadingSSSS));
+    store.dispatch(getAllProducts(categoryId, null, setLoadingSSSS));
 
   }, [locationGetData?.state?.categories])
 
   useEffect(() => {
+    setPageNumber(0);
     setNewData(filtersproduct);
   }, [filtersproduct]);
 

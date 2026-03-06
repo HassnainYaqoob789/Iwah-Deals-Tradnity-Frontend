@@ -98,6 +98,7 @@ const Header2 = ({
       !localStorage.getItem("changeCurrencies")
     ) {
       let currency_code = ChangeCurrences.map((v) => v.code);
+  
 
       axios
         .get("https://ipapi.co/json/")
@@ -122,7 +123,7 @@ const Header2 = ({
         .catch(() => {
           if (currency_code.includes("PKR")) {
             localStorage.setItem("changeCurrencies", "PKR");
-            localStorage.setItem("defaultDataaa", "PKR");
+            localStorage.setItem("defaultDataaa", "BHD");
           } else if (currency_code.includes("USD")) {
             localStorage.setItem("changeCurrencies", "USD");
             localStorage.setItem("defaultDataaa", "USD");
@@ -133,6 +134,7 @@ const Header2 = ({
         });
     }
   }, [ChangeCurrences]);
+
 
   useEffect(() => {
     if (localStorage.getItem("customerData")) {
@@ -258,7 +260,7 @@ const Header2 = ({
                           fontWeight: "600",
                         }}
                       >
-                        {localStorage.getItem("changeCurrencies") || "PKR"}
+                        {localStorage.getItem("changeCurrencies") || "BHD"}
                         <FaAngleDown
                           style={{
                             fontSize: '12px',          // size adjust kar sakta hai
@@ -494,7 +496,7 @@ const Header2 = ({
                             fontWeight: "600",
                           }}
                         >
-                          {localStorage.getItem("changeCurrencies") || "PKR"}
+                          {localStorage.getItem("changeCurrencies") || "BHD"}
 
                           <FaAngleDown
                             style={{
@@ -924,7 +926,7 @@ const Header2 = ({
                   setShow(!show);
                 }}
               >
-                home
+                homesss
               </Link>
             </li>
             {categories.map((m) => {

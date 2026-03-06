@@ -369,7 +369,7 @@ class LeftSideBar extends Component {
           </>
         ) : (
           // ── No product after loading finished ──
-          !shortView && (
+          (
             <div
               className="text-center"
               style={{
@@ -390,8 +390,6 @@ class LeftSideBar extends Component {
                 The product you're looking for might have been removed or is
                 temporarily unavailable.
               </p>
-              {/* Optional: back button ya suggestion */}
-              {/* <button className="btn btn-primary mt-4">Go Back to Shop</button> */}
             </div>
           )
         )}
