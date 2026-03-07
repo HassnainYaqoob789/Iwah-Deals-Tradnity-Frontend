@@ -110,6 +110,7 @@ class Collection2 extends Component {
             <Link
               to={{
                 pathname: "/shopPage",
+                search: `?category=${objshopPage.id}`,
                 state: { categories: objshopPage },
               }}
               className="col-see-all-link"

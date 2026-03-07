@@ -102,7 +102,7 @@ class FooterFour extends Component {
                                 {categories && categories.length !== 0
                                     ? (categories.length < 6 ? categories.slice(0, categories.length) : categories.slice(0, 6)).map((m, i) => (
                                         <li key={i}>
-                                            <Link to={{ pathname: "/shopPage", state: { categories: m } }}>
+                                            <Link to={{ pathname: "/shopPage", search: `?category=${m.id}`, state: { categories: m } }}>
                                                 {m.name}
                                             </Link>
                                         </li>

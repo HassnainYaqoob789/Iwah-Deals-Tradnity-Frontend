@@ -1,13 +1,13 @@
 //base URL
 
-export const base_url = `${window.location.protocol}/Admin/public/`;
-export const temp_url = `${window.location.protocol}/Admin/public/`;
+// export const base_url = `${window.location.protocol}/Admin/public/`;
+// export const temp_url = `${window.location.protocol}/Admin/public/`;
 
 // export const base_url = "https://dev.tradnity.com/Admin/public/"
 // export const temp_url = "https://dev.tradnity.com/Admin/public/"
 
-// export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
-// export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
+export const base_url = "https://iwahdeals.tradnity.com/Admin/public/"
+export const temp_url = "https://iwahdeals.tradnity.com/Admin/public/"
 
 // export const base_url = "https://hscollection.com.pk/Admin/public/"
 // export const temp_url = "https://hscollection.com.pk/Admin/public/"

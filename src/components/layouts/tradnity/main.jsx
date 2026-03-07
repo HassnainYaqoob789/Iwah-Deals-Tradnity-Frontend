@@ -316,7 +316,7 @@ class TradnityMain extends Component {
                         }}
                       >
                         <Link
-                          to={{ pathname: "/shopPage", state: { categories: m } }}
+                          to={{ pathname: "/shopPage", search: `?category=${m.id}`, state: { categories: m } }}
                           style={{ textDecoration: "none", width: "100%" }}
                         >
                           {/* Icon Box - overflow visible taake image bahar nikale */}
@@ -407,6 +407,7 @@ class TradnityMain extends Component {
                     <Link
                       to={{
                         pathname: "/shopPage",
+                         search: `?category=${obj9shopPage.id}`,
                         state: { categories: obj9shopPage },
                       }}
                     >
@@ -435,6 +436,7 @@ class TradnityMain extends Component {
                         <Link
                           to={{
                             pathname: "/shopPage",
+                            search: `?category=${obj10shopPage.id}`,
                             state: { categories: obj10shopPage },
                           }}
                         >
@@ -480,6 +482,7 @@ class TradnityMain extends Component {
                     <Link
                       to={{
                         pathname: "/shopPage",
+                        search: `?category=${obj13shopPage.id}`,
                         state: { categories: obj13shopPage },
                       }}
                     >
@@ -509,6 +512,7 @@ class TradnityMain extends Component {
                         <Link
                           to={{
                             pathname: "/shopPage",
+                            search: `?category=${obj15shopPage.id}`,
                             state: { categories: obj15shopPage },
                           }}
                         >
@@ -551,6 +555,7 @@ class TradnityMain extends Component {
                 <Link
                   to={{
                     pathname: "/shopPage",
+                    search: `?category=${obj12shopPage.id}`,
                     state: { categories: obj12shopPage },
                   }}
                 >
@@ -576,6 +581,7 @@ class TradnityMain extends Component {
                 <Link
                   to={{
                     pathname: "/shopPage",
+                    search: `?category=${obj20shopPage.id}`,
                     state: { categories: obj20shopPage },
                   }}
                 >
@@ -614,6 +620,7 @@ class TradnityMain extends Component {
                 <Link
                   to={{
                     pathname: "/shopPage",
+                    search: `?category=${obj6shopPage.id}`,
                     state: { categories: obj6shopPage },
                   }}
                 >
@@ -645,6 +652,7 @@ class TradnityMain extends Component {
                 <Link
                   to={{
                     pathname: "/shopPage",
+                    search: `?category=${obj17shopPage.id}`,
                     state: { categories: obj17shopPage },
                   }}
                 >

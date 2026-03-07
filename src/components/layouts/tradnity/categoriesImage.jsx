@@ -37,7 +37,7 @@ const CategoriesImage = (props) => {
     <div className="mx-3 row">
       <div className='col-sm-12 col-md-3 col-lg-3'>
 
-        <Link to={{ pathname: "/shopPage", state: { categories: m.name } }}>
+        <Link to={{ pathname: "/shopPage", search: `?category=${m.id}`, state: { categories: m } }}>
           <img
             style={{ width: "95%", borderRadius: "152px", display: "block", minHeight: "47vh", minWidth: "17vw", }}
             src={m && m?.image_url && m.image_url}
@@ -46,7 +46,7 @@ const CategoriesImage = (props) => {
           />
         </Link>
         <div className="row justify-content-md-center text-center">
-          <Link to={{ pathname: "/shopPage", state: { categories: m.name } }}>
+          <Link to={{ pathname: "/shopPage", search: `?category=${m.id}`, state: { categories: m } }}>
             <h3 style={{ textTransform: "uppercase", marginTop: 17, fontSize: "1em", marginLeft: "87px" }}>
               <strong>{m.name}</strong>
             </h3>

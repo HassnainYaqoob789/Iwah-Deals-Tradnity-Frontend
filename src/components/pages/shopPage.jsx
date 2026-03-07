@@ -54,7 +54,7 @@ const ShopPage = (props) => {
       ? props.location.state.slider
       : "";
 
-  const { filtersproduct, Category } = props;
+  const { filtersproduct, Category, getallcategories } = props;
 
   const [age, setAge] = useState(10);
 
@@ -84,12 +84,34 @@ const ShopPage = (props) => {
   let sliderData = sliderN;
 
   const [pageNumber, setPageNumber] = useState(0);
+  const [paramCateIdObj, setCateIdObj] = useState([]);
   const usersPerPage = 12;
   const pagesVisited = pageNumber * usersPerPage;
   const locationGetData = useLocation();
 
-  const categoryNameS = locationGetData?.state?.categories?.name;
-  const categoryImage = locationGetData?.state?.categories?.image_url
+
+
+  const queryParams = new URLSearchParams(locationGetData.search);
+  const categoryIdParams = queryParams.get("category")
+    ? Number(queryParams.get("category"))   // "7" → 7 (number)
+    : null;
+
+  const categoryNameS = locationGetData?.state?.categories?.name || paramCateIdObj?.name || "";
+
+  const categoryImage = locationGetData?.state?.categories?.image_url || paramCateIdObj?.image_url || ""
+
+  useEffect(() => {
+    if (!getallcategories?.data?.length || !categoryIdParams) return
+    const categoryObj = getallcategories.data.find(
+      (cat) => cat.id == categoryIdParams
+    )
+    setCateIdObj(categoryObj)
+  }, [categoryIdParams, getallcategories])
+
+  useEffect(() => {
+    console.log("checkallcategories", paramCateIdObj)
+
+  }, [paramCateIdObj])
 
   const pageCount = Math.ceil(
     newData.filter((value) => {
@@ -104,12 +126,14 @@ const ShopPage = (props) => {
 
   useEffect(() => {
     // Category ID lein
-    const categoryId = locationGetData?.state?.categories?.id || null;
+    const categoryId = locationGetData?.state?.categories?.id || paramCateIdObj?.id || null;
+    if (!categoryId) return
+
     setLoadingSSSS(true)
     // Category ID ke saath products fetch karein
     store.dispatch(getAllProducts(categoryId, null, setLoadingSSSS));
 
-  }, [locationGetData?.state?.categories])
+  }, [locationGetData?.state?.categories, paramCateIdObj])
 
   useEffect(() => {
     setPageNumber(0);
@@ -124,6 +148,19 @@ const ShopPage = (props) => {
       behavior: "smooth"           // ← yeh line add karo
     });
   };
+
+  // // Category change detect hone pe ya filter apply hone pe
+  // const resetToPageOne = () => {
+  //   const params = new URLSearchParams(locationGetData.search);
+  //   params.delete("page");   // page hata do → default page 1
+
+  //   history.replace({
+  //     pathname: locationGetData.pathname,
+  //     search: params.toString() ? `?${params.toString()}` : "",
+  //   });
+
+  //   setPageNumber(0);
+  // };
 
   function handleClick(e) {
     store.dispatch(removeWishlist(e));
@@ -994,7 +1031,7 @@ const ShopPage = (props) => {
                   <ProductItem
                     product={data}
                     product_ids={data?.id || ""}
-                    category_ids={locationGetData?.state?.categories?.id || ""}
+                    category_ids={locationGetData?.state?.categories?.id || paramCateIdObj?.id || ""}
                     onAddToWishlistClicked={() =>
                       localStorage.getItem("customerData")
                         ? handleClick(data.api.id)
@@ -1048,6 +1085,7 @@ const ShopPage = (props) => {
 const mapStateToProps = (state) => ({
   filtersproduct: state.data.products ? state.data.products : [],
   Category: state && state.data && state.data.menu ? state.data.menu : [],
+  getallcategories: state.data.getCategory,
 });
 
 export default withRouter(connect(mapStateToProps)(ShopPage));

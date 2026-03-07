@@ -595,6 +595,7 @@ const Header2 = ({
                           <Link
                             to={{
                               pathname: "/shopPage",
+                              search: `?category=${m.id}`,
                               state: { categories: m },
                             }}
                             style={{ textDecoration: "none", fontSize: "12px" }}
@@ -617,6 +618,7 @@ const Header2 = ({
                                   <Link
                                     to={{
                                       pathname: "/shopPage",
+                                      search: `?category=${sub.id}`,
                                       state: { categories: sub },
                                     }}
                                     style={{ textDecoration: "none", fontSize: "12px", textAlign: "left" }}
@@ -959,6 +961,7 @@ const Header2 = ({
                     <Link
                       to={{
                         pathname: "/shopPage",
+                        search: `?category=${m.id}`,
                         state: { categories: m },
                       }}
                       style={{
@@ -1021,6 +1024,7 @@ const Header2 = ({
                           <Link
                             to={{
                               pathname: "/shopPage",
+                              search: `?category=${sub.id}`,
                               state: { categories: sub },
                             }}
                             style={{

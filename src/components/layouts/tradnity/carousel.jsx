@@ -44,6 +44,7 @@ const TradnityCarousel = (props) => {
                         ? "/shopPage" // agar slider_product 1 hai to state nahi jaayega
                         : {
                           pathname: "/shopPage",
+                          search: `?category=${img?.slider_product}`,
                           state: {
                             categories: {
                               id: img?.slider_product,
