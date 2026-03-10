@@ -4,14 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";
 import { Navigation, Thumbs } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/modules/pagination/pagination.min.css";
-import React from "react";
+import React, { forwardRef } from "react";
 import Placeholder from "../../../assets/images/placeholder.gif";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Magnifier from "react-magnifier";
 import { useEffect, useState } from "react";
 
 
-const ProductImagesSlider = (props) => {
+const ProductImagesSlider = forwardRef((props, ref) => {
   const [activeThumb, setActiveThumb] = useState(null);
   const videoUrl = props.item.api.videos.map((v) => {
     return { video_url: v.url, type: "video" };
@@ -45,6 +45,7 @@ const ProductImagesSlider = (props) => {
     <>
       <span style={{ display: "block", width: "100%" }}>
         <Swiper
+          ref={ref}
           loop={true}
           spaceBetween={10}
           navigation={true}
@@ -225,7 +226,9 @@ const ProductImagesSlider = (props) => {
       </span>
     </>
   );
-};
+});
+
+ProductImagesSlider.displayName = "ProductImagesSlider";
 ProductImagesSlider.propTypes = {
   images: PropTypes.array.isRequired,
 };

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import {
   FacebookShareButton,
   WhatsappShareButton,
@@ -6,13 +7,13 @@ import {
 } from "react-share";
 import ReactStars from "react-rating-stars-component";
 import ProductImagesSlider from "./productSlider/productSlider";
-import { IoArrowBack } from 'react-icons/io5';   // ya FiArrowLeft from 'react-icons/fi' — dono acha lagta hai
+import { IoArrowBack } from "react-icons/io5"; // ya FiArrowLeft from 'react-icons/fi' — dono acha lagta hai
 import ScrollToTop from "../pages/scroll_to_top";
 import Demoimg from "../../assets/images/placeholder.gif";
 import Collection3 from "../layouts/tradnity/collection3";
 import Heart from "react-heart";
 import Loader from "../../svg_code/loader";
-import LoaderSpinner from "../../components/loadingspin"
+import LoaderSpinner from "../../components/loadingspin";
 
 import React, { useEffect, useRef, useState } from "react";
 import Service from "./common/service";
@@ -137,6 +138,8 @@ const ProductDetailsMe = (props) => {
   const [ff_price, set_ff_price] = useState(0);
 
   const [loadingImg, setLoadingImg] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const swiperRef = useRef(null);
   const counter = useRef(0);
 
   const imageLoaded = () => {
@@ -144,6 +147,38 @@ const ProductDetailsMe = (props) => {
     if (counter.current >= 1) {
       setLoadingImg(false);
     }
+  };
+
+  const handleNextImage = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slideNext();
+      setCurrentImageIndex(swiperRef.current.swiper.activeIndex);
+    } else if (Array.isArray(image) && image.length > 0) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === image.length - 1 ? 0 : prevIndex + 1,
+      );
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slidePrev();
+      setCurrentImageIndex(swiperRef.current.swiper.activeIndex);
+    } else if (Array.isArray(image) && image.length > 0) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? image.length - 1 : prevIndex - 1,
+      );
+    }
+  };
+
+  const getCurrentImage = () => {
+    if (Array.isArray(image) && image.length > 0) {
+      const currentImg = image[currentImageIndex];
+      return typeof currentImg === "string"
+        ? currentImg
+        : currentImg?.original_image_url;
+    }
+    return Demoimg;
   };
 
   const LoadNow = () => {
@@ -560,10 +595,9 @@ const ProductDetailsMe = (props) => {
         ? parsedColorCodes
         : appconfigs;
 
-    setLoadingSSSS(true)
+    setLoadingSSSS(true);
     const categoryPId = getNumberFromQuery(queryParams.get("category"));
     const productPId = getNumberFromQuery(queryParams.get("product"));
-
 
     let categoryId = locaaaa?.state?.category_ids || categoryPId || null;
     let productId = locaaaa?.state?.product_id || productPId || null;
@@ -573,7 +607,7 @@ const ProductDetailsMe = (props) => {
 
   document.querySelector(".loader-wrapper").style = "display: none";
   // Check if loading
-  const isLoading = LoadingSSS
+  const isLoading = LoadingSSS;
 
   // Loading UI
   if (isLoading) {
@@ -582,8 +616,8 @@ const ProductDetailsMe = (props) => {
         style={{
           display: "flex",
           justifyContent: "center", // horizontal center
-          alignItems: "center",     // vertical center
-          height: "100vh",          // viewport height
+          alignItems: "center", // vertical center
+          height: "100vh", // viewport height
         }}
       >
         <LoaderSpinner />
@@ -591,12 +625,48 @@ const ProductDetailsMe = (props) => {
     );
   }
 
+  const arrowStyle = {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 10,
+    background: "transparent",
+    border: "none",
+    borderRadius: "50%",
+    width: "44px",
+    height: "44px",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "28px",
+    color: "#ff7a00",
+    transition: "all 0.25s ease",
+  };
+
   return (
     <>
       <ScrollToTop />
 
-      {!shortView && <HeadSEO title={name} />}
-      <div className={!drop && !shortView ? "row px-5 container-custom" : "row mx-0 px-0 container-custom"}>
+      {!shortView && (
+        <Helmet>
+          <title>{`${name} | Iwah Deals`}</title>
+          <meta name="description" content={(item?.api?.meta_description || item?.api?.short_description || name).replace(/<[^>]*>?/gm, '').trim()} />
+          <meta property="og:title" content={`${name} | Iwah Deals`} />
+          <meta property="og:description" content={(item?.api?.meta_description || item?.api?.short_description || name).replace(/<[^>]*>?/gm, '').trim()} />
+          <meta property="og:image" content={image && image.length > 0 ? (typeof image[0] === 'string' ? image[0] : image[0]?.original_image_url) : "https://iwahdeals.com/assets/images/logo.png"} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={window.location.href} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </Helmet>
+      )}
+      <div
+        className={
+          !drop && !shortView
+            ? "row  container-custom"
+            : "row mx-0 px-0 container-custom"
+        }
+      >
         {drop ? (
           <div className="col-md-2"></div>
         ) : (
@@ -611,53 +681,150 @@ const ProductDetailsMe = (props) => {
           <div className="firstDiv col-md-4 col-sm-12">
             {shortView ? (
               <>
-                {image && image.length !== 0 && typeof image[0] == "string" ? (
-                  <LazyLoadImage
-                    src={image && image[0]}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      border: "1px solid rgb(236 132 95 / 50%)",
-                      display: "block",
-                    }}
-                  />
-                ) : image &&
-                  image.length !== 0 &&
-                  image[0]?.original_image_url ? (
-                  <LazyLoadImage
-                    src={
-                      image &&
-                      image.length !== 0 &&
-                      image[0]?.original_image_url
-                    }
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      border: "1px solid rgb(236 132 95 / 50%)",
-                      display: "block",
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* Left Arrow */}
+                  {image && image.length > 1 && (
+                    <button
+                      onClick={handlePrevImage}
+                      style={{ ...arrowStyle, left: "10px" }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = "rgba(255,122,0,0.1)";
+                        e.target.style.transform =
+                          "translateY(-50%) scale(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = "transparent";
+                        e.target.style.transform = "translateY(-50%) scale(1)";
+                      }}
+                    >
+                      &#10094;
+                    </button>
+                  )}
 
-                    }}
-                  />
-                ) : (
-                  <span
-                    style={{
-                      width: "100%",
-                      border: "1px solid rgb(236 132 95 / 50%)",
-                    }}
-                  >
-                    <Placeholder />
-                  </span>
-                )}
-                {/* <LazyLoadImage src={image && (image.length !== 0) && (typeof(image[0]) == "string") ? image[0] : image[0]?.original_image_url ? image[0].original_image_url : Demoimg}  style={{width:"100%", height:"100%",border:'1px solid rgb(236 132 95 / 50%)'}} /> */}
+                  {/* Image Display */}
+                  <div style={{ width: "100%" }}>
+                    {image &&
+                      image.length !== 0 &&
+                      typeof image[currentImageIndex] == "string" ? (
+                      <LazyLoadImage
+                        src={image && image[currentImageIndex]}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          border: "1px solid rgb(236 132 95 / 50%)",
+                          display: "block",
+                        }}
+                      />
+                    ) : image &&
+                      image.length !== 0 &&
+                      image[currentImageIndex]?.original_image_url ? (
+                      <LazyLoadImage
+                        src={
+                          image &&
+                          image.length !== 0 &&
+                          image[currentImageIndex]?.original_image_url
+                        }
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          border: "1px solid rgb(236 132 95 / 50%)",
+                          display: "block",
+                        }}
+                      />
+                    ) : (
+                      <span
+                        style={{
+                          width: "100%",
+                          border: "1px solid rgb(236 132 95 / 50%)",
+                        }}
+                      >
+                        <Placeholder />
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Right Arrow */}
+                  {image && image.length > 1 && (
+                    <button
+                      onClick={handleNextImage}
+                      style={{ ...arrowStyle, right: "10px" }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = "rgba(255,122,0,0.1)";
+                        e.target.style.transform =
+                          "translateY(-50%) scale(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = "transparent";
+                        e.target.style.transform = "translateY(-50%) scale(1)";
+                      }}
+                    >
+                      &#10095;
+                    </button>
+                  )}
+                </div>
               </>
             ) : (
-              <ProductImagesSlider
-                images={image}
-                item={item}
-                imageLoad={() => imageLoaded()}
-                imageStyle={{ width: "100%", height: "auto", objectFit: "contain" }} // ✅ pass this
+              <>
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* Left Arrow */}
+                  <button
+                    onClick={handlePrevImage}
+                    style={{ ...arrowStyle, left: "0px" }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = "rgba(255,122,0,0.1)";
+                      e.target.style.transform = "translateY(-50%) scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = "transparent";
+                      e.target.style.transform = "translateY(-50%) scale(1)";
+                    }}
+                  >
+                    &#10094;
+                  </button>
 
-              />
+                  <ProductImagesSlider
+                    ref={swiperRef}
+                    images={image}
+                    item={item}
+                    imageLoad={() => imageLoaded()}
+                    imageStyle={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+
+                  {/* Right Arrow */}
+                  <button
+                    onClick={handleNextImage}
+                    style={{ ...arrowStyle, right: "0px" }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = "rgba(255,122,0,0.1)";
+                      e.target.style.transform = "translateY(-50%) scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = "transparent";
+                      e.target.style.transform = "translateY(-50%) scale(1)";
+                    }}
+                  >
+                    &#10095;
+                  </button>
+                </div>
+              </>
             )}
 
             {/* </div> */}
@@ -1051,7 +1218,6 @@ const ProductDetailsMe = (props) => {
                         alignItems: "center",
                       }}
                     >
-
                       <div className="skeleton-item skeleton-titleI my-1"></div>
                     </div>
                   ) : (
@@ -1095,14 +1261,18 @@ const ProductDetailsMe = (props) => {
                             {/* <Button disabled={validateC} className='myButtons'  onClick={() => { appconfig && appconfig?.navbar_guset && (appconfig.navbar_guset === 1) ? addItemTOCart(p_id) : history.push(`${process.env.PUBLIC_URL}/login`) }} style={{ color: "#fff" }} type="button" size='large'>
                                 Add to Cart &nbsp;&nbsp; <FiShoppingCart size={22} className='fw-bold mx-2' />
                               </Button> */}
-
                             &nbsp;&nbsp;&nbsp;&nbsp;
                           </div>
                         </div>
                       </div>
 
                       <div
-                        style={{ width: "100%", marginTop: "1rem", display: "flex", marginLeft: "10px" }}
+                        style={{
+                          width: "100%",
+                          marginTop: "1rem",
+                          display: "flex",
+                          marginLeft: "10px",
+                        }}
                       >
                         <Link
                           disabled={validateC}
@@ -1126,9 +1296,7 @@ const ProductDetailsMe = (props) => {
                               appconfig?.navbar_guset &&
                               appconfig.navbar_guset === 1
                               ? addItemTOCart(p_id)
-                              : history.push(
-                                `${process.env.PUBLIC_URL}/login`,
-                              );
+                              : history.push(`${process.env.PUBLIC_URL}/login`);
                           }}
                           type="submit"
                           className="myButtons"
@@ -1138,8 +1306,7 @@ const ProductDetailsMe = (props) => {
                             width: "200px",
                           }}
                         >
-                          <span className="spansa"></span> Add to Cart
-                          &nbsp;
+                          <span className="spansa"></span> Add to Cart &nbsp;
                           {/* <FiShoppingCart
                             size={22}
                             className="fw-bold mx-2"
@@ -1245,8 +1412,20 @@ const ProductDetailsMe = (props) => {
 
         {!shortView && (
           <div className="my-5">
-            <Collection3 pathName={pathName} maincompLoading={LoadingSSS} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} ProductCategories={item?.api?.Category} />
-            <PeopleViewed pathName={pathName} maincompLoading={LoadingSSS} clickedReload={true} category_Id={locaaaa?.state?.category_ids || ""} ProductCategories={item?.api?.Category} />
+            <Collection3
+              pathName={pathName}
+              maincompLoading={LoadingSSS}
+              clickedReload={true}
+              category_Id={locaaaa?.state?.category_ids || ""}
+              ProductCategories={item?.api?.Category}
+            />
+            <PeopleViewed
+              pathName={pathName}
+              maincompLoading={LoadingSSS}
+              clickedReload={true}
+              category_Id={locaaaa?.state?.category_ids || ""}
+              ProductCategories={item?.api?.Category}
+            />
           </div>
         )}
       </div>

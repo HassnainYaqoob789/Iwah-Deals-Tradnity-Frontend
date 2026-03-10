@@ -15,9 +15,61 @@ import {
 } from "../../../actions";
 import ProductItem from "./product-item";
 import "./proCard.css";
-import "./collection.css";  /* bring in shared collection styles including .col-see-all-link */
+import "./collection.css"; /* bring in shared collection styles including .col-see-all-link */
 import Loader from "../../../svg_code/loader";
 import history from "../../../history";
+
+const PrevArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    style={{
+      position: "absolute",
+      left: "-18px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 10,
+      background: "#fff",
+      border: "1px solid #ddd",
+      borderRadius: "50%",
+      width: "36px",
+      height: "36px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+      marginLeft: "20px",
+    }}
+  >
+    &#8249;
+  </button>
+);
+
+const NextArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    style={{
+      position: "absolute",
+      right: "-18px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 10,
+      background: "#fff",
+      border: "1px solid #ddd",
+      borderRadius: "50%",
+      width: "36px",
+      height: "36px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+      marginRight: "20px",
+    }}
+  >
+    &#8250;
+  </button>
+);
 
 class Collection2 extends Component {
   constructor(props) {
@@ -55,13 +107,25 @@ class Collection2 extends Component {
       store.dispatch(addItemToCart(item));
     }
 
-    const { items, symbol, addToCompare, title, subtitle, categoryID, SeeAllProductsBtnCdn, getallcategories } = this.props;
+    const {
+      items,
+      symbol,
+      addToCompare,
+      title,
+      subtitle,
+      categoryID,
+      SeeAllProductsBtnCdn,
+      getallcategories,
+    } = this.props;
     const { products, loading } = this.state;
 
     if (items && items.length === 0) {
-      setTimeout(() => { this.setState({ loading: false }); }, 5000);
+      setTimeout(() => {
+        this.setState({ loading: false });
+      }, 5000);
     }
-    let objshopPage = getallcategories?.data?.filter((e) => e?.id == categoryID)[0] || {};
+    let objshopPage =
+      getallcategories?.data?.filter((e) => e?.id == categoryID)[0] || {};
     const featured = products;
     return (
       <div>
@@ -72,12 +136,13 @@ class Collection2 extends Component {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            paddingTop: "1rem",               /* 16px */
-            paddingBottom: "0px",             /* 16px */
-            paddingLeft: "1rem",               /* 16px */
-            paddingRight: "1rem",              /* 16px */
+            paddingTop: "1rem" /* 16px */,
+            paddingBottom: "0px" /* 16px */,
+            paddingLeft: "1rem" /* 16px */,
+            paddingRight: "1rem" /* 16px */,
             // marginBottom: "1rem",              /* 16px */
-            gap: "1.5rem",                     /* 24px */
+            gap: "1.5rem" /* 24px */,
+            overflow: "visible"
           }}
         >
           {/* Title & Subtitle group */}
@@ -85,7 +150,7 @@ class Collection2 extends Component {
             <span
               className="title-inner1 mob-heading"
               style={{
-                fontSize: "1.375rem", /* 22px */
+                fontSize: "1.375rem" /* 22px */,
                 fontFamily: "Poppins",
                 fontWeight: "600",
               }}
@@ -95,12 +160,13 @@ class Collection2 extends Component {
             {subtitle ? (
               <span
                 style={{
-                  fontSize: "1rem", /* 16px */
+                  fontSize: "1rem" /* 16px */,
                   fontFamily: "Poppins",
                   fontWeight: "400",
                 }}
               >
-                {" "}( {subtitle})
+                {" "}
+                ( {subtitle})
               </span>
             ) : null}
           </div>
@@ -128,10 +194,10 @@ class Collection2 extends Component {
             width: "100%",
             margin: "0",
             overflow: "visible",
-            paddingLeft: 0,
-            paddingRight: 0,
-            paddingTop: "0.625rem", /* 10px */
-            paddingBottom: "1.25rem", /* 20px */
+            paddingLeft: "1.5rem" /* ← was 0, now gives space for left arrow */,
+            paddingRight: "1.5rem",
+            paddingTop: "0.625rem" /* 10px */,
+            paddingBottom: "1.25rem" /* 20px */,
           }}
         >
           <div className="row">
@@ -142,8 +208,12 @@ class Collection2 extends Component {
               {featured && featured.length !== 0 ? (
                 <Slider
                   {...Product4}
+                  arrows={true}
+                  prevArrow={<PrevArrow />}
+                  nextArrow={<NextArrow />}
                   className="product-4 product-m"
-                  style={{ margin: "0 4px" }}
+                  // style={{ margin: "0 4px" }}
+                  style={{ margin: "0 4px", position: "relative" }}
                 >
                   {featured.map((product, index) => (
                     <div key={index}>
@@ -189,7 +259,6 @@ function mapStateToProps(state) {
     getcatebyproducts: state.categoryByProducts.getcatebyproducts,
     symbol: state.data.symbol,
     getallcategories: state.data.getCategory,
-
   };
 }
 

@@ -158,7 +158,7 @@ const Header2 = ({
         }
 
         setStleeee(styleObject);
-      } catch (error) {}
+      } catch (error) { }
     }
   }, [sociallinks?.nav_style]);
 
@@ -182,8 +182,8 @@ const Header2 = ({
                   style={{
                     display:
                       mainScreenText &&
-                      mainScreenText.main_text === "none" &&
-                      mainScreenText.sub_text === "none"
+                        mainScreenText.main_text === "none" &&
+                        mainScreenText.sub_text === "none"
                         ? "none"
                         : "block",
                     marginBottom: "30px",
@@ -323,21 +323,21 @@ const Header2 = ({
                         style={
                           dispCurrunce
                             ? {
-                                zIndex: 9999,
-                                visibility: "visible",
-                                display: "block",
-                                opacity: 1,
-                                top: "152%",
-                                left: "-5px",
-                              }
+                              zIndex: 9999,
+                              visibility: "visible",
+                              display: "block",
+                              opacity: 1,
+                              top: "152%",
+                              left: "-5px",
+                            }
                             : {
-                                zIndex: 9999,
-                                visibility: "hidden",
-                                display: "none",
-                                opacity: 0,
-                                top: "100%",
-                                width: "102%",
-                              }
+                              zIndex: 9999,
+                              visibility: "hidden",
+                              display: "none",
+                              opacity: 0,
+                              top: "100%",
+                              width: "102%",
+                            }
                         }
                       >
                         <>
@@ -432,19 +432,19 @@ const Header2 = ({
                         style={
                           dispAccount
                             ? {
-                                zIndex: 9999,
-                                visibility: "visible",
-                                display: "block",
-                                opacity: 1,
-                                top: "100%",
-                              }
+                              zIndex: 9999,
+                              visibility: "visible",
+                              display: "block",
+                              opacity: 1,
+                              top: "100%",
+                            }
                             : {
-                                zIndex: 9999,
-                                visibility: "hidden",
-                                display: "none",
-                                opacity: 0,
-                                top: "100%",
-                              }
+                              zIndex: 9999,
+                              visibility: "hidden",
+                              display: "none",
+                              opacity: 0,
+                              top: "100%",
+                            }
                         }
                       >
                         {localStorage.getItem("customerData") ? (
@@ -574,8 +574,8 @@ const Header2 = ({
                         >
                           <br />
                           {cartData &&
-                          cartData.items &&
-                          cartData.items.length !== 0 ? (
+                            cartData.items &&
+                            cartData.items.length !== 0 ? (
                             cartData.items.map((item, index) => {
                               return (
                                 <li
@@ -586,16 +586,14 @@ const Header2 = ({
                                   <div className="row m-2">
                                     <div className="col-md-4">
                                       <Link
-                                        to={`${
-                                          process.env.PUBLIC_URL
-                                        }/product/${
-                                          item && item.parent_url !== null
+                                        to={`${process.env.PUBLIC_URL
+                                          }/product/${item && item.parent_url !== null
                                             ? item.parent_url
                                             : item.product.url_key
-                                        }`}
+                                          }`}
                                       >
                                         {item.product !== "" &&
-                                        item.product.images[0].url ? (
+                                          item.product.images[0].url ? (
                                           <LazyLoadImage
                                             alt="img"
                                             src={
@@ -634,13 +632,11 @@ const Header2 = ({
                                           }}
                                         >
                                           <Link
-                                            to={`${
-                                              process.env.PUBLIC_URL
-                                            }/product/${
-                                              item && item.parent_url !== null
+                                            to={`${process.env.PUBLIC_URL
+                                              }/product/${item && item.parent_url !== null
                                                 ? item.parent_url
                                                 : item.product.url_key
-                                            }`}
+                                              }`}
                                           >
                                             <p
                                               className="cart-text fw-bold"
@@ -680,8 +676,8 @@ const Header2 = ({
                         </div>
 
                         {cartData &&
-                        cartData.items &&
-                        cartData.items.length !== 0 ? (
+                          cartData.items &&
+                          cartData.items.length !== 0 ? (
                           <li
                             className="total dats "
                             style={{ display: "block" }}
@@ -713,8 +709,8 @@ const Header2 = ({
                     </div>
                   </li>
                   {appconfig &&
-                  appconfig?.navbar_wishlist &&
-                  appconfig.navbar_wishlist === 1 ? (
+                    appconfig?.navbar_wishlist &&
+                    appconfig.navbar_wishlist === 1 ? (
                     <li className="checkout mx-1">
                       <Link
                         className="ancd ancx"
@@ -796,8 +792,8 @@ const Header2 = ({
                       </Link>
                     </li>
                     {appconfig &&
-                    appconfig?.nav_about &&
-                    appconfig.nav_about === 1 ? (
+                      appconfig?.nav_about &&
+                      appconfig.nav_about === 1 ? (
                       <li>
                         <Link
                           onClick={() => setPageRoute("/about-us")}
@@ -822,8 +818,8 @@ const Header2 = ({
                       </Link>
                     </li>
                     {appconfig &&
-                    appconfig?.nav_contact &&
-                    appconfig.nav_contact === 1 ? (
+                      appconfig?.nav_contact &&
+                      appconfig.nav_contact === 1 ? (
                       <li>
                         <Link
                           onClick={() => setPageRoute("/contact")}
@@ -910,8 +906,8 @@ const Header2 = ({
             </li>
 
             {appconfig &&
-            appconfig?.nav_contact &&
-            appconfig.nav_contact === 1 ? (
+              appconfig?.nav_contact &&
+              appconfig.nav_contact === 1 ? (
               <li className="menu_item">
                 <Link
                   to={`${process.env.PUBLIC_URL}/contact`}

@@ -98,7 +98,7 @@ const Header2 = ({
       !localStorage.getItem("changeCurrencies")
     ) {
       let currency_code = ChangeCurrences.map((v) => v.code);
-  
+
 
       axios
         .get("https://ipapi.co/json/")
@@ -1036,7 +1036,7 @@ const Header2 = ({
                           >
                             {sub.name}
                           </Link>
-                          
+
                         </li>
                       ))}
                     </ul>
