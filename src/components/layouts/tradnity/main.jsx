@@ -407,7 +407,7 @@ class TradnityMain extends Component {
                     <Link
                       to={{
                         pathname: "/shopPage",
-                        search: `?category=${obj9shopPage.id}`,
+                         search: `?category=${obj9shopPage.id}`,
                         state: { categories: obj9shopPage },
                       }}
                     >

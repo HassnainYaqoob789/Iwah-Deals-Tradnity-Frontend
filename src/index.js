@@ -171,6 +171,21 @@ const Root = () => {
         //         document.body.style.overflowY = 'auto';
         //       }
 
+        useEffect(() => {
+                const handleVisibilityChange = () => {
+                        document.title = document.visibilityState === 'visible'
+                                ? 'Welcome back!'
+                                : 'Come back .';
+
+                };
+                // Add event listener when component mounts
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                // Remove event listener when component unmounts
+                return () => {
+                        document.removeEventListener('visibilitychange', handleVisibilityChange);
+                };
+                // console.log("kksthththtj",document)
+        }, []);
 
 
         useEffect(() => {

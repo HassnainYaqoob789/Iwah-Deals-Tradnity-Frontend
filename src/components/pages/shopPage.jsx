@@ -481,16 +481,7 @@ const ShopPage = (props) => {
       <ScrollToTop />
 
       {/* <HeadSEO title="Shop Page" /> */}
-      <Helmet>
-        <title>{categoryNameS ? `${categoryNameS} | Iwah Deals` : "Our Products | Iwah Deals"}</title>
-        <meta name="description" content={paramCateIdObj?.meta_description || paramCateIdObj?.description || `Browse our collection of ${categoryNameS || 'products'} at Iwah Deals.`} />
-        <meta property="og:title" content={categoryNameS ? `${categoryNameS} | Iwah Deals` : "Our Products | Iwah Deals"} />
-        <meta property="og:description" content={paramCateIdObj?.meta_description || paramCateIdObj?.description || `Browse our collection of ${categoryNameS || 'products'} at Iwah Deals.`} />
-        <meta property="og:image" content={categoryImage || "https://iwahdeals.com/assets/images/logo.png"} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
+      <HeadSEO title={categoryNameS ? `${categoryNameS} - Products` : "Our Products"} />
 
 
       {/* Category Banner - Agar image ho to show karo */}
